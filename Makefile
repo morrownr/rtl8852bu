@@ -14,6 +14,12 @@ EXTRA_CFLAGS += -Wno-unused-label
 #EXTRA_CFLAGS += -Wno-unused-function
 EXTRA_CFLAGS += -Wno-unused
 #EXTRA_CFLAGS += -Wno-uninitialized
+EXTRA_CFLAGS += -Wno-implicit-fallthrough
+
+# gcc-12
+EXTRA_CFLAGS += -Wno-address
+EXTRA_CFLAGS += -Wframe-larger-than=1648
+EXTRA_CFLAGS += -Wno-cast-function-type
 
 ############ ANDROID COMMON KERNEL ############
 # clang

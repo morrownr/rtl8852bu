@@ -236,10 +236,7 @@ u8 rtw_cfg80211_ch_switch_notify(_adapter *adapter, struct rtw_chan_def *rtw_chd
 
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0))
 	if (started) {
-#if (defined(CONFIG_MLD_KERNEL_PATCH) || (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0)))
-		/* ToDo CONFIG_RTW_MLD */
-		cfg80211_ch_switch_started_notify(adapter->pnetdev, &chdef, 0, 0, false);
-#elif (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 11, 0))
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 11, 0))
 
 		/* --- cfg80211_ch_switch_started_notfiy() ---
 		 *  A new parameter, bool quiet, is added from Linux kernel v5.11,
@@ -249,7 +246,15 @@ u8 rtw_cfg80211_ch_switch_notify(_adapter *adapter, struct rtw_chan_def *rtw_chd
 		 *  called by others with block-tx.
 		 */
 
-		cfg80211_ch_switch_started_notify(adapter->pnetdev, &chdef, 0, false);
+		cfg80211_ch_switch_started_notify(adapter->pnetdev, &chdef,
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 3, 0)
+		 0, 0, false, 0);
+#else
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0)
+		 0,
+#endif
+		 0, false);
+#endif
 #else
 		cfg80211_ch_switch_started_notify(adapter->pnetdev, &chdef, 0);
 #endif
@@ -261,8 +266,11 @@ u8 rtw_cfg80211_ch_switch_notify(_adapter *adapter, struct rtw_chan_def *rtw_chd
 		goto exit;
 
 #if (defined(CONFIG_MLD_KERNEL_PATCH) || (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 19, 2)))
-	/* ToDo CONFIG_RTW_MLD */
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 3, 0))
+	cfg80211_ch_switch_notify(adapter->pnetdev, &chdef, 0, 0);
+#else
 	cfg80211_ch_switch_notify(adapter->pnetdev, &chdef, 0);
+#endif
 #else
 	cfg80211_ch_switch_notify(adapter->pnetdev, &chdef);
 #endif

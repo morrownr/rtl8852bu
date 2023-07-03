@@ -1481,38 +1481,15 @@ static void rtw_get_tx_idle(_adapter *padapter)
 	return;
 }
 
-static enum rf_path mp_get_path_from_ant_num(u8 antnum)
-{
-	enum rf_path ret = RF_PATH_B;
-
-	switch (antnum) {
-		default:
-			break;
-		case 1:
-			ret = RF_PATH_B;
-			break;
-		case 2:
-			ret = RF_PATH_AB;
-			break;
-		case 3:
-			ret = RF_PATH_ABC;
-			break;
-	}
-	return ret;
-}
-
 static void rtw_dpd_bypass(_adapter *padapter, u8 phy_idx)
 {
 	u32 data32 = 0;
 	u32 dpd_bypass_val = 0;
 	struct dvobj_priv *dvobj = adapter_to_dvobj(padapter);
-	struct rtw_phl_com_t *phl_com = dvobj->phl_com;
 	struct mp_priv *pmp_priv = &padapter->mppriv;
-	u8 bk_rfpath = pmp_priv->curr_rfpath;
 
 	if (pmp_priv->rtw_mp_tx_method != RTW_MP_TMACT_TX) {
 		pmp_priv->is_tmac_mode = 1;
-		pmp_priv->curr_rfpath = mp_get_path_from_ant_num(phl_com->phy_cap[0].tx_path_num);
 		rtw_mp_phl_config_arg(padapter, RTW_MP_CONFIG_CMD_SET_TXRX_MODE);
 	}
 
@@ -1523,7 +1500,6 @@ static void rtw_dpd_bypass(_adapter *padapter, u8 phy_idx)
 
 	if (pmp_priv->rtw_mp_tx_method != RTW_MP_TMACT_TX) {
 		pmp_priv->is_tmac_mode = 0;
-		pmp_priv->curr_rfpath = bk_rfpath;
 		rtw_mp_phl_config_arg(padapter, RTW_MP_CONFIG_CMD_SET_TXRX_MODE);
 	}
 
@@ -3119,6 +3095,26 @@ u8 rtw_mp_phl_txpower(_adapter *padapter, struct rtw_mp_txpwr_arg	*ptxpwr_arg, u
 	return ptxpwr_arg->cmd_ok;
 }
 
+static enum rf_path mp_get_path_from_ant_num(u8 antnum)
+{
+	enum rf_path ret = RF_PATH_B;
+
+	switch (antnum) {
+		default:
+			break;
+		case 1:
+			ret = RF_PATH_B;
+			break;
+		case 2:
+			ret = RF_PATH_AB;
+			break;
+		case 3:
+			ret = RF_PATH_ABC;
+			break;
+	}
+	return ret;
+}
+
 bool rtw_mp_phl_config_arg(_adapter *padapter, enum rtw_mp_config_cmdid cmdid)
 {
 	struct mp_priv	*pmppriv = &padapter->mppriv;
@@ -3156,8 +3152,8 @@ bool rtw_mp_phl_config_arg(_adapter *padapter, enum rtw_mp_config_cmdid cmdid)
 		break;
 	case RTW_MP_CONFIG_CMD_SET_TXRX_MODE:
 		pmp_arg.is_tmac_mode = pmppriv->is_tmac_mode;
-		pmp_arg.tx_rfpath = pmppriv->curr_rfpath;
-		pmp_arg.rx_rfpath = pmppriv->curr_rfpath;;
+		pmp_arg.tx_rfpath = mp_get_path_from_ant_num(phl_com->phy_cap[0].tx_path_num);
+		pmp_arg.rx_rfpath = mp_get_path_from_ant_num(phl_com->phy_cap[0].rx_path_num);
 		pmp_arg.ant_tx = pmppriv->antenna_trx;
 		pmp_arg.ant_rx = pmppriv->antenna_trx;
 		break;

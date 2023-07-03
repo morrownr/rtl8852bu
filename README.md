@@ -2,16 +2,16 @@
 
 ### Manual Installation Instructions
 
-Note: The installation, install-driver.sh, automate the installation
-process, however, if you want to or need to do a basic command line
-installation, use the following:
+Note: The installation script, install-driver.sh, automates the
+installation process, however, if you want to or need to do a basic
+command line installation, use the following:
 
 ```
 make clean
 ```
 
 ```
-make
+make -j$(nproc)
 ```
 
 If secure boot is off:
@@ -65,8 +65,13 @@ Restart your computer and use the BOOT menu from BIOS to boot. In the MOK
 managerment screen, select `reset MOK list`. Then Reboot and retry from
 the step `sudo make sign-install`.
 
-To remove the driver if installed by the manual installation instructions:
+To remove the driver if installed by the Manual Installation
+Instructions:
 
 ```
 sudo make uninstall
+```
+
+```
+sudo reboot
 ```

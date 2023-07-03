@@ -42,7 +42,7 @@ sudo reboot
 
 The MOK managerment screen will appear during boot:
 
-`Shim UEFI Key Management"
+`Shim UEFI Key Management`
 
 `Press any key...`
 

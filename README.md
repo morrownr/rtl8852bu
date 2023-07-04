@@ -65,6 +65,10 @@ Restart your computer and use the BOOT menu from BIOS to boot. In the MOK
 managerment screen, select `reset MOK list`. Then Reboot and retry from
 the step `sudo make sign-install`.
 
+-----
+
+### Manual Removal Instructions
+
 To remove the driver if installed by the Manual Installation
 Instructions:
 
@@ -75,3 +79,33 @@ sudo make uninstall
 ```
 sudo reboot
 ```
+
+-----
+
+Note: If you use the Manual Installation Instructions, you will need to
+repeat the process each time a new kernel is installed in your distro.
+
+-----
+
+### Driver Options (`edit-options.sh`)
+
+Note: In Linux, driver options are more correctly called module parameters.
+
+A file called `8812au.conf` will be installed in `/etc/modprobe.d` by
+default if you use the `install-driver.sh` script. If you are doing a
+Manual Installation, you can use the 'edit-options.sh` script to 
+install and/or edit the file.
+
+Note: The installation script will prompt you to edit the options.
+
+This file will be read and applied to the driver on each system boot.
+
+To edit the driver options file, run the `edit-options.sh` script
+
+```
+sudo ./edit-options.sh
+```
+
+Note: Documentation for Driver Options is included in the file `8812au.conf`.
+
+-----

@@ -143,7 +143,7 @@ endif
 CONFIG_RTW_DEBUG = y
 # default log level is _DRV_INFO_ = 4,
 # please refer to "How_to_set_driver_debug_log_level.doc" to set the available level.
-CONFIG_RTW_LOG_LEVEL = 4
+CONFIG_RTW_LOG_LEVEL = 1
 CONFIG_RTW_PHL_LOG_LEVEL = 3
 
 # enable /proc/net/rtlxxxx/ debug interfaces
@@ -753,7 +753,7 @@ sign:
 	@mokutil --import MOK.der
 	@$(KSRC)/scripts/sign-file sha256 MOK.priv MOK.der 8852bu.ko
 
-sign-install: all sign install
+sign-install: sign install
 
 modules_install:
 	$(MAKE) INSTALL_MOD_STRIP=1 M=$(M) -C $(KSRC) modules_install
@@ -817,6 +817,7 @@ clean:
 	rm -fr Module.symvers ; rm -fr Module.markers ; rm -fr modules.order
 	rm -fr *.mod.c *.mod *.o .*.cmd *.ko *~
 	rm -fr .tmp_versions
+	rm -fr MOK.der MOK.priv
 endif
 
 ############ ANDROID COMMON KERNEL ############

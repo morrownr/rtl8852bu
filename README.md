@@ -33,8 +33,8 @@ enter commands.
 sudo make sign-install
 ```
 
-You will be promted for a password, please remember the password as it
-will be used in some of the following steps.
+Note: You will be promted for a password, please remember the password
+as it will be used in some of the following steps.
 
 ```
 sudo reboot
@@ -54,16 +54,17 @@ Select "Yes"
 
 When promted, enter the password you entered earlier.
 
-If you enter the wrong password, your computer will not be bootable. In
-this case, use the BOOT menu from your BIOS to boot then as follows:
+Warning: If you enter the wrong password, your computer will not be
+bootable. In this case, use the BOOT menu from your BIOS to boot then as
+follows:
 
 ```
 sudo mokutil --reset
 ```
 
-Restart your computer and use the BOOT menu from BIOS to boot. In the MOK
-managerment screen, select `reset MOK list`. Then Reboot and retry from
-the step `sudo make sign-install`.
+Restart your computer. Use the BOOT menu from BIOS to boot. In the MOK
+managerment screen, select `reset MOK list`, then Reboot and retry from
+the above step `sudo make sign-install`.
 
 -----
 

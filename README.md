@@ -92,11 +92,12 @@ sudo reboot
 Note: In Linux, driver options are called module parameters.
 
 A file called `8852bu.conf` will be installed in `/etc/modprobe.d` by
-default if you use the `install-driver.sh` script. If you are doing a
-Manual Installation, you can use the 'edit-options.sh` script to 
-install and/or edit the file.
+default if you use the installation script, `install-driver.sh`. If you
+are following the Manual Installation Instructions, you can use the
+`edit-options.sh` script to install and/or edit the file.
 
-Note: The installation script will prompt you to edit the options.
+Note: The installation script, `install-driver.sh`. will prompt you to
+edit the options.
 
 `8852bu.conf` will be read and applied to the driver on each system boot.
 

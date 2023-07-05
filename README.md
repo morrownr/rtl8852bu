@@ -63,8 +63,12 @@ sudo mokutil --reset
 ```
 
 Restart your computer. Use the BOOT menu from BIOS to boot. In the MOK
-managerment screen, select `reset MOK list`, then Reboot and retry from
+managerment screen, select `reset MOK list`, then reboot and retry from
 the above step `sudo make sign-install`.
+
+Note: If you use the Manual Installation Instructions, you will need to
+repeat the installation process each time a new kernel is installed in
+your distro.
 
 -----
 
@@ -83,23 +87,18 @@ sudo reboot
 
 -----
 
-Note: If you use the Manual Installation Instructions, you will need to
-repeat the process each time a new kernel is installed in your distro.
-
------
-
 ### Driver Options (`edit-options.sh`)
 
-Note: In Linux, driver options are more correctly called module parameters.
+Note: In Linux, driver options are called module parameters.
 
-A file called `8812au.conf` will be installed in `/etc/modprobe.d` by
+A file called `8852bu.conf` will be installed in `/etc/modprobe.d` by
 default if you use the `install-driver.sh` script. If you are doing a
 Manual Installation, you can use the 'edit-options.sh` script to 
 install and/or edit the file.
 
 Note: The installation script will prompt you to edit the options.
 
-This file will be read and applied to the driver on each system boot.
+`8852bu.conf` will be read and applied to the driver on each system boot.
 
 To edit the driver options file, run the `edit-options.sh` script
 
@@ -107,6 +106,7 @@ To edit the driver options file, run the `edit-options.sh` script
 sudo ./edit-options.sh
 ```
 
-Note: Documentation for Driver Options is included in the file `8812au.conf`.
+Note: Documentation for Driver Options is included in the file
+ `8852bu.conf`.
 
 -----

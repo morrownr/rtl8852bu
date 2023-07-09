@@ -21,7 +21,7 @@ EXTRA_CFLAGS += -Wno-address
 EXTRA_CFLAGS += -Wframe-larger-than=1648
 EXTRA_CFLAGS += -Wno-cast-function-type
 
-# fix to ensure gcc is using the correct ARCH name
+# ensure gcc is using the correct ARCH name
 SUBARCH := $(shell uname -m | sed -e "s/i.86/i386/; s/armv.l/arm/; s/aarch64/arm64/;")
 ARCH ?= $(SUBARCH)
 
@@ -35,11 +35,6 @@ EXTRA_CFLAGS += -Wno-invalid-source-encoding
 EXTRA_CFLAGS += -Wno-tautological-pointer-compare
 EXTRA_CFLAGS += -Wno-tautological-overlap-compare
 EXTRA_CFLAGS += -Wno-pointer-bool-conversion
-endif
-
-GCC_VER_49 := $(shell echo `$(CC) -dumpversion | cut -f1-2 -d.` \>= 4.9 | bc )
-ifeq ($(GCC_VER_49),1)
-EXTRA_CFLAGS += -Wno-date-time	# Fix compile error && warning on gcc 4.9 and later
 endif
 
 EXTRA_CFLAGS += -I$(src)/include

@@ -11,7 +11,6 @@ endif
 
 # ensure gcc is using the correct ARCH name
 #SUBARCH := $(shell uname -m | sed -e s/i.86/i386/)
-#SUBARCH := $(shell uname -m | sed -e "s/i.86/i386/; s/x86_64/i386/; s/armv.l/arm/; s/aarch64/arm64/;")
 SUBARCH := $(shell uname -m | sed -e "s/i.86/i386/; s/armv.l/arm/; s/aarch64/arm64/;")
 ARCH ?= $(SUBARCH)
 

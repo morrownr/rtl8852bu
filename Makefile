@@ -21,10 +21,6 @@ EXTRA_CFLAGS += -Wno-address
 EXTRA_CFLAGS += -Wframe-larger-than=1648
 EXTRA_CFLAGS += -Wno-cast-function-type
 
-# ensure gcc is using the correct ARCH name
-SUBARCH := $(shell uname -m | sed -e "s/i.86/i386/; s/armv.l/arm/; s/aarch64/arm64/;")
-ARCH ?= $(SUBARCH)
-
 ############ ANDROID COMMON KERNEL ############
 # clang
 ifeq ($(CC), clang)
@@ -653,6 +649,10 @@ EXTRA_CFLAGS += -DCONFIG_RTW_80211R
 EXTRA_CFLAGS += -DRTW_FT_DBG=0 -DRTW_WNM_DBG=0 -DRTW_MBO_DBG=0
 endif
 
+# ensure gcc is using the correct ARCH name
+#SUBARCH := $(shell uname -m | sed -e "s/i.86/i386/; s/armv.l/arm/; s/aarch64/arm64/;")
+#ARCH ?= $(SUBARCH)
+
 ########### PLATFORM OPS  ##########################
 # Import platform assigned KSRC and CROSS_COMPILE
 include $(wildcard $(DRV_PATH)/platform/*.mk)
@@ -744,7 +744,7 @@ install:
 	/sbin/depmod -a ${KVER}
 
 uninstall:
-	rm -f $(MODDESTDIR)/$(MODULE_NAME).ko
+	rm -f $(MODDESTDIR)$(MODULE_NAME).ko
 	/sbin/depmod -a ${KVER}
 
 sign:
@@ -752,7 +752,8 @@ sign:
 	@mokutil --import MOK.der
 	@$(KSRC)/scripts/sign-file sha256 MOK.priv MOK.der 8852bu.ko
 
-sign-install: sign install
+sign-install:
+	sign install
 
 modules_install:
 	$(MAKE) INSTALL_MOD_STRIP=1 M=$(M) -C $(KSRC) modules_install

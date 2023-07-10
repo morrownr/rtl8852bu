@@ -30,8 +30,8 @@ confirm that this is the correct driver for your adapter.
 - Supported interface modes
   * IBSS
   * Managed
-  * Monitor (see FAQ) (see [Monitor_Mode](https://github.com/morrownr/Monitor_Mode))
-  * AP (see FAQ) (see [Bridged Wireless Access Point](https://github.com/morrownr/USB-WiFi/blob/main/home/AP_Mode/Bridged_Wireless_Access_Point.md))
+  * Monitor (see [Monitor_Mode](https://github.com/morrownr/Monitor_Mode))
+  * AP (see [Bridged Wireless Access Point](https://github.com/morrownr/USB-WiFi/blob/main/home/AP_Mode/Bridged_Wireless_Access_Point.md))
   * P2P-client
   * P2P-GO
 - Log level control
@@ -109,7 +109,10 @@ compile and maybe a modification or two to the Makefile).
 
 ### Compatible Devices
 
-* tbd
+* Brostrend AX1L
+* Brostrend AX4L
+* ALFA AWUS036AXER
+* ALFA AWUS036AX
 
 Note: If you are looking for information about what adapter to buy,
 click [here](https://github.com/morrownr/USB-WiFi) and look for Main Menu

@@ -28,7 +28,7 @@
 # GNU General Public License for more details.
 
 SCRIPT_NAME="install-driver.sh"
-SCRIPT_VERSION="20230709"
+SCRIPT_VERSION="20230715"
 MODULE_NAME="8852bu"
 DRV_VERSION="1.19.3"
 
@@ -40,7 +40,7 @@ DRV_NAME="rtl${MODULE_NAME}"
 DRV_DIR="$(pwd)"
 OPTIONS_FILE="${MODULE_NAME}.conf"
 
-# check to ensure sudo was used to start the script
+# check to ensure sudo or su - was used to start the script
 if [ "$(id -u)" -ne 0 ]; then
 	echo "You must run this script with superuser (root) privileges."
 	echo "Try: \"sudo ./${SCRIPT_NAME}\""
@@ -141,9 +141,9 @@ echo ": ${SCRIPT_NAME} v${SCRIPT_VERSION}"
 # display system architecture
 echo ": ${KARCH} (system architecture)"
 
-# display gcc required architecture
+# display gcc architecture
 ARCH=$(uname -m | sed -e "s/i.86/i386/; s/armv.l/arm/; s/aarch64/arm64/;")
-echo ": ${ARCH} (gcc required architecture)"
+echo ": ${ARCH} (gcc architecture)"
 
 SMEM=$(LANG=C free | awk '/Mem:/ { print $2 }')
 sproc=$(nproc)
@@ -249,20 +249,18 @@ if [ -f "/usr/lib/modules/${KVER}/kernel/drivers/net/wireless/${DRV_NAME}/${MODU
 	echo "Removal complete."
 fi
 
-# check for and remove dkms installations
+# check for and remove all dkms installations with DRV_NAME
+# thanks Alkis
 if command -v dkms >/dev/null 2>&1; then
-	if dkms status | grep -i  ${DRV_NAME}; then
-		echo ": ---------------------------"
-		echo
-# need to add code here to delete any DRV_VERSION
-		echo "Removing a dkms installation."
-		dkms remove -m ${DRV_NAME} -v ${DRV_VERSION} --all
-		echo "Removing ${OPTIONS_FILE} from /etc/modprobe.d"
-		rm -f /etc/modprobe.d/${OPTIONS_FILE}
-		echo "Removing source files from /usr/src/${DRV_NAME}-${DRV_VERSION}"
-		rm -rf /usr/src/${DRV_NAME}-${DRV_VERSION}
-		echo "Removal complete."
-	fi
+	dkms status | sort -k1,1 -u | while IFS=" ," read -r modver ker arch installed; do
+		mod=${modver%/*}
+		ver=${modver#*/}
+		case "$mod" in *${MODULE_NAME})
+			dkms remove -m "$mod" -v "$ver" --all
+		esac
+	done
+	rm -f /etc/modprobe.d/${OPTIONS_FILE}
+	rm -rf /usr/src/${DRV_NAME}-${DRV_VERSION}
 fi
 
 # sets module parameters (driver options) and blacklisted modules
@@ -387,12 +385,17 @@ else
 fi
 
 # provide driver upgrade information
-echo "Info: Upgrade this driver with the following commands as needed:"
+echo "Info: Update this driver with the following commands as needed:"
+echo
 echo "$ git pull"
 echo "$ sudo sh install-driver.sh"
-echo "Note: Upgrades to this driver should be performed before distro upgrades."
-echo "Note: Upgrades can be performed as often as you like."
-echo "Note: Work on this driver is continuous."
+echo
+echo "Note: Updates to this driver SHOULD be performed before distro"
+echo "      upgrades such as Ubuntu 23.10 to 24.04."
+echo "Note: Updates can be performed as often as you like. It is"
+echo "      recommended to update at least every 2 months."
+echo "Note: Work on this driver, like the Linux kernel, is continuous."
+echo "Enjoy!"
 echo ": ---------------------------"
 echo
 

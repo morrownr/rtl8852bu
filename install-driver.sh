@@ -250,17 +250,21 @@ if [ -f "/usr/lib/modules/${KVER}/kernel/drivers/net/wireless/${DRV_NAME}/${MODU
 fi
 
 # check for and remove all dkms installations with DRV_NAME
-# thanks Alkis
 if command -v dkms >/dev/null 2>&1; then
-	dkms status | sort -k1,1 -u | while IFS=" ," read -r modver ker arch installed; do
-		mod=${modver%/*}
-		ver=${modver#*/}
-		case "$mod" in *${MODULE_NAME})
-			dkms remove -m "$mod" -v "$ver" --all
+	dkms status | while IFS=" ,:/" read -r modname modver kerver xarch xstatus; do
+		if [ "$modname" = "$DRV_NAME" ]; then
+			echo "->" "$modname"   "$modver"   "$kerver"   "$xarch"   "$xstatus"
+		fi
+		case "$modname" in *${MODULE_NAME})
+			dkms remove -m "$modname" -v "$modver" -k "$kerver"
 		esac
 	done
-	rm -f /etc/modprobe.d/${OPTIONS_FILE}
-	rm -rf /usr/src/${DRV_NAME}-${DRV_VERSION}
+	if [ -f /etc/modprobe.d/${OPTIONS_FILE} ]; then
+		rm -f /etc/modprobe.d/${OPTIONS_FILE}
+	fi
+	if [ -f /usr/src/${DRV_NAME}-${DRV_VERSION} ]; then
+		rm -rf /usr/src/${DRV_NAME}-${DRV_VERSION}
+	fi
 fi
 
 # sets module parameters (driver options) and blacklisted modules
@@ -395,6 +399,7 @@ echo "      upgrades such as Ubuntu 23.10 to 24.04."
 echo "Note: Updates can be performed as often as you like. It is"
 echo "      recommended to update at least every 2 months."
 echo "Note: Work on this driver, like the Linux kernel, is continuous."
+echo
 echo "Enjoy!"
 echo ": ---------------------------"
 echo

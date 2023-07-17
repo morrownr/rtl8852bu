@@ -251,9 +251,9 @@ fi
 
 # check for and remove all dkms installations with DRV_NAME
 if command -v dkms >/dev/null 2>&1; then
-	dkms status | while IFS=" ,:/" read -r modname modver kerver xarch xstatus; do
+	dkms status | while IFS=" ,/" read -r modname modver kerver _dummy; do
 		if [ "$modname" = "$DRV_NAME" ]; then
-			echo "->" "$modname"   "$modver"   "$kerver"   "$xarch"   "$xstatus"
+			echo "->" "$modname"   "$modver"   "$kerver"
 		fi
 		case "$modname" in *${MODULE_NAME})
 			dkms remove -m "$modname" -v "$modver" -k "$kerver"

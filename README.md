@@ -50,7 +50,7 @@ confirm that this is the correct driver for your adapter.
 
 ### Compatible CPU Architectures
 
-- x86, i686
+- x86, i386, i686
 - x86-64, amd64
 - armv6l, armv7l (arm)
 - aarch64 (arm64)
@@ -59,6 +59,9 @@ confirm that this is the correct driver for your adapter.
 
 - Kernels: 4.19 - 5.19 (Realtek)
 - Kernels: 6.0  - 6.5  (community support)
+
+Note: Kernels earlier than 4.19 may work but are not tested or supported
+as I only have a limited amount of time to work on this project.
 
 ### Tested Compilers
 
@@ -112,6 +115,7 @@ compile and maybe a modification or two to the Makefile).
 * Brostrend AX4L
 * ALFA AWUS036AXER
 * ALFA AWUS036AX
+* Additional adapters that are based on the supported chipsets.
 
 Note: If you are looking for information about what adapter to buy,
 click [here](https://github.com/morrownr/USB-WiFi) and look for Main Menu
@@ -126,9 +130,14 @@ about single-state and multi-state adapters. click
 
 ### Installation Information
 
+Warning: It is recommended that you follow the installation steps in the
+next section. Avoid installation by downloading the zip file if at all
+possible. Support can only be provided, on a best effort basis, if the
+steps in the next section are followed.
+
 Warning: Installing multiple out-of-kernel drivers for the same hardware
 usually does not end well. The install-driver.sh script has the capability
-to detect and remove many conflicting drivers but not all. If this driver
+to detect and remove most conflicting drivers but not all. If this driver
 does not work well after installation and you have previously installed a
 driver that you did not remove, it is suggested that you run the following
 command in an effort to determine if you need to take action to manually
@@ -138,10 +147,10 @@ remove conflicting drivers:
 sudo dkms status
 ```
 
-Warning: If you decide to do a distro upgrade, which will likely install a
-new version of kernel such as 5.15 to 6.1, you need to upgrade this driver
-with the newest available code before performing the disto upgrade. Use
-the following commands in the driver directory:
+Warning: If you decide to do a distro upgrade, which will likely install
+a new version of kernel such as 5.15 to 6.1, you need to update this
+driver with the newest available code before performing the disto
+upgrade. Use the following commands in the driver directory:
 
 ```
 git pull
@@ -151,13 +160,14 @@ git pull
 sudo ./install-driver.sh
 ```
 
-Temporary internet access is required for installation. There are numerous ways
-to enable temporary internet access depending on your hardware and situation.
-[One method is to use tethering from a phone.](https://www.makeuseof.com/tag/how-to-tether-your-smartphone-in-linux).
+Temporary internet access is required for installation. There are
+numerous ways to enable temporary internet access depending on your
+hardware and situation. [One method is to use tethering from a phone.](https://www.makeuseof.com/tag/how-to-tether-your-smartphone-in-linux).
 Another method is to keep a [WiFi adapter that uses an in-kernel driver](https://github.com/morrownr/USB-WiFi/blob/main/home/USB_WiFi_Adapters_that_are_supported_with_Linux_in-kernel_drivers.md) in your toolkit.
 
-You will need to use the terminal interface. The quick way to open a terminal:
-Ctrl+Alt+T (hold down on the Ctrl and Alt keys then press the T key).
+You will need to use the terminal interface. The quick way to open a
+terminal: Ctrl+Alt+T (hold down on the Ctrl and Alt keys then press the
+T key).
 
 An alternative terminal is to use SSH (Secure Shell) from the same or from
 another computer, in which case you will be in a suitable terminal after logging

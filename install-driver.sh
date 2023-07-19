@@ -28,7 +28,7 @@
 # GNU General Public License for more details.
 
 SCRIPT_NAME="install-driver.sh"
-SCRIPT_VERSION="20230715"
+SCRIPT_VERSION="20230718"
 MODULE_NAME="8852bu"
 DRV_VERSION="1.19.3"
 
@@ -193,7 +193,6 @@ else
 	echo ": mokutil not installed"
 fi
 
-
 echo ": ---------------------------"
 echo
 
@@ -249,14 +248,14 @@ if [ -f "/usr/lib/modules/${KVER}/kernel/drivers/net/wireless/${DRV_NAME}/${MODU
 	echo "Removal complete."
 fi
 
-# check for and remove all dkms installations with DRV_NAME
+# check for and remove all dkms installations with DRV_NAME on the
+# currently active kernel
 if command -v dkms >/dev/null 2>&1; then
 	dkms status | while IFS=" ,/" read -r modname modver kerver _dummy; do
-		if [ "$modname" = "$DRV_NAME" ]; then
-			echo "->" "$modname"   "$modver"   "$kerver"
-		fi
 		case "$modname" in *${MODULE_NAME})
-			dkms remove -m "$modname" -v "$modver" -k "$kerver"
+			if [ "$kerver" = "$KVER" ]; then
+				dkms remove -m "$modname" -v "$modver" -k "$kerver"
+			fi
 		esac
 	done
 	if [ -f /etc/modprobe.d/${OPTIONS_FILE} ]; then
@@ -401,7 +400,6 @@ echo "      recommended to update at least every 2 months."
 echo "Note: Work on this driver, like the Linux kernel, is continuous."
 echo
 echo "Enjoy!"
-echo ": ---------------------------"
 echo
 
 # unblock wifi

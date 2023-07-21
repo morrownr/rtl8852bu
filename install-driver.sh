@@ -253,9 +253,7 @@ fi
 if command -v dkms >/dev/null 2>&1; then
 	dkms status | while IFS=" ,/" read -r modname modver kerver _dummy; do
 		case "$modname" in *${MODULE_NAME})
-			if [ "$kerver" = "$KVER" ]; then
-				dkms remove -m "$modname" -v "$modver" -k "$kerver"
-			fi
+				dkms remove -m "$modname" -v "$modver" -k "$kerver"			fi
 		esac
 	done
 	if [ -f /etc/modprobe.d/${OPTIONS_FILE} ]; then

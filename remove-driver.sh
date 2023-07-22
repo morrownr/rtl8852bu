@@ -28,8 +28,8 @@
 # GNU General Public License for more details.
 
 SCRIPT_NAME="remove-driver.sh"
-SCRIPT_VERSION="20230226"
-MODULE_NAME="88x2bu"
+SCRIPT_VERSION="20230722"
+MODULE_NAME="8852bu"
 DRV_VERSION="5.13.1"
 
 KARCH="$(uname -m)"
@@ -108,8 +108,12 @@ fi
 # determine if dkms is installed and run the appropriate routines
 if command -v dkms >/dev/null 2>&1; then
 	echo "Removing a dkms installation."
-	#  2>/dev/null suppresses the output of dkms
-	dkms remove -m ${DRV_NAME} -v ${DRV_VERSION} --all 2>/dev/null
+#	2>/dev/null suppresses the output of dkms
+	dkms status | while IFS=" ,/" read -r modname modver kerver _dummy; do
+		case "$modname" in *${MODULE_NAME})
+			dkms remove -m "$modname" -v "$modver" -k "$kerver"
+		esac
+	done
 	RESULT=$?
 	#echo "Result=${RESULT}"
 

@@ -248,12 +248,11 @@ if [ -f "/usr/lib/modules/${KVER}/kernel/drivers/net/wireless/${DRV_NAME}/${MODU
 	echo "Removal complete."
 fi
 
-# check for and remove all dkms installations with DRV_NAME on the
-# currently active kernel
+# check for and remove all dkms installations with DRV_NAME
 if command -v dkms >/dev/null 2>&1; then
 	dkms status | while IFS=" ,/" read -r modname modver kerver _dummy; do
 		case "$modname" in *${MODULE_NAME})
-				dkms remove -m "$modname" -v "$modver" -k "$kerver"			fi
+			dkms remove -m "$modname" -v "$modver" -k "$kerver"
 		esac
 	done
 	if [ -f /etc/modprobe.d/${OPTIONS_FILE} ]; then

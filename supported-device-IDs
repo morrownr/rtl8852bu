@@ -15,7 +15,7 @@ We can search the list of driver supported IDs shown below.
 
 Realtek default IDs
 
-ID 0BDA:B852 - Default ID for USB multi-function (such as WiFi plus bluetooth)
+ID 0BDA:B852 - Default ID for USB multi-function (WiFi plus bluetooth)
 ID 0BDA:B832 - Default ID for USB Single-function, WiFi only
 ID 0BDA:B83A - Default ID
 ID 0BDA:B85A - Default ID

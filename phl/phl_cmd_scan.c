@@ -31,7 +31,7 @@ static void _cmd_scan_req_deinit(struct phl_info_t *phl_info,
                                  struct rtw_phl_scan_param *param);
 static void _cmd_scan_timer(void *context);
 
-#define DBG_SCAN_CHAN_DUMP
+// nrm #define DBG_SCAN_CHAN_DUMP
 
 
 u8 phl_cmd_scan_ctrl(struct rtw_phl_scan_param *param, u8 band_idx,

@@ -4,8 +4,21 @@
 
 - v1.19.3 (Realtek) (20230505) plus updates from the Linux community
 
-Note: Please read "supported-device-IDs" for information about how to
-confirm that this is the correct driver for your adapter.
+Note: Posting this driver is not a recommendation for Linux users to buy
+USB WiFi adapters based on the Realtek rtl8852/32bu chipsets. Realtek
+out-of-kernel wifi drivers, such as this one, are designed to be used by
+skilled programmers producing products such as embedded systems. Users
+of desktop distros such as Ubuntu, Debian, Manjaro, Fedora, Raspberry Pi
+OS and other mainline desktop distros will likely find adapters that use 
+in-kernel drivers to be more stable and much more trouble-free. The
+following links will provide more information:
+
+[USB WiFi adapters that are supported with Linux in-kernel drivers](https://github.com/morrownr/USB-WiFi/blob/main/home/USB_WiFi_Adapters_that_are_supported_with_Linux_in-kernel_drivers.md)
+
+[USB WiFi adapter information for Linux](https://github.com/morrownr/USB-WiFi/blob/main/home/USB_WiFi_Adapter_Information_for_Linux.md)
+
+Note: Please read the file "supported-device-IDs" for information about
+how to confirm that this is the correct driver for your adapter.
 
 ### Supported Features
 
@@ -69,8 +82,8 @@ as I only have a limited amount of time to work on this project.
 
 ### Tested Linux Distributions
 
-Note: The information in this section depends largely on user reports which can
-be provided via PR or message in Issues.
+Note: The information in this section depends largely on user reports
+which can be provided via PR or message in Issues.
 
 - [Arch Linux](https://www.archlinux.org) (kernels 5.4 and 5.11)
 
@@ -86,7 +99,7 @@ be provided via PR or message in Issues.
 
 - [openSUSE](https://www.opensuse.org/) Tumbleweed (rolling) (kernel 5.15)
 
-- [Raspberry Pi OS](https://www.raspberrypi.org) (2023-05-03)(ARM 32 bit and 64 bit) (kernel 6.1)
+- [Raspberry Pi OS](https://www.raspberrypi.org) (2023-05-03)(ARM 32 bit and 64 bit) (kernel 6.1.38)
 
 - [Raspberry Pi Desktop](https://www.raspberrypi.org) (2022-07-01) (x86 32 bit) (kernel 5.10)
 
@@ -111,6 +124,9 @@ compile and maybe a modification or two to the Makefile).
 
 ### Compatible Devices
 
+Warning: The below adapters are multi-state adapters, meaning that they
+have an internal Windows driver, and may be problematic on Linux.
+
 * Brostrend AX1L
 * Brostrend AX4L
 * ALFA AWUS036AXER
@@ -118,15 +134,17 @@ compile and maybe a modification or two to the Makefile).
 * Additional adapters that are based on the supported chipsets.
 
 Note: If you are looking for information about what adapter to buy,
-click [here](https://github.com/morrownr/USB-WiFi) and look for Main Menu
-item 2 which will show information about and links to recommended adapters.
+click [here](https://github.com/morrownr/USB-WiFi) and look for Main
+Menu item 2 which will show information about and links to recommended
+adapters.
 
-Note: If you decide to buy an adapter that is supported by this driver, I
-recommend you search for an adapter that is `single-state and single-function`.
-Multi-function adapters, wifi and bluetooth, can be problematic. The rtl8852bu
-chipset is multi-fuction. The rtl8832bu chipset is single-function. For advice
-about single-state and multi-state adapters. click
-[here](https://github.com/morrownr/USB-WiFi) and look for Main Menu item 1.
+Note: If you decide to buy an adapter that is supported by this driver,
+I recommend you search for an adapter that is `single-state and
+single-function`. Multi-function adapters, wifi and bluetooth, can be
+problematic. The rtl8852bu chipset is multi-fuction. The rtl8832bu
+chipset is single-function. For advice about single-state and
+multi-state adapters. click [here](https://github.com/morrownr/USB-WiFi)
+and look for Main Menu item 1.
 
 ### Installation Information
 
@@ -136,12 +154,12 @@ possible. Support can only be provided, on a best effort basis, if the
 steps in the next section are followed.
 
 Warning: Installing multiple out-of-kernel drivers for the same hardware
-usually does not end well. The install-driver.sh script has the capability
-to detect and remove most conflicting drivers but not all. If this driver
-does not work well after installation and you have previously installed a
-driver that you did not remove, it is suggested that you run the following
-command in an effort to determine if you need to take action to manually
-remove conflicting drivers:
+usually does not end well. The install-driver.sh script has the
+capability to detect and remove most conflicting drivers but not all. If
+this driver does not work well after installation and you have
+previously installed a driver that you did not remove, it is suggested
+that you run the following command in an effort to determine if you need
+to take action to manually remove conflicting drivers:
 
 ```
 sudo dkms status
@@ -149,18 +167,29 @@ sudo dkms status
 
 Warning: If you decide to do a distro upgrade, which will likely install
 a new version of kernel such as 5.15 to 6.1, you need to update this
-driver with the newest available code before performing the disto
-upgrade. Use the following commands in the driver directory:
+driver with the newest available code and then run the removal script
+before performing the disto upgrade. Use the following commands in the
+driver directory:
 
 ```
 git pull
 ```
 
+Note: Do not reboot before running the below command so that the driver
+stays active until after your distro upgrade is complete.
+
 ```
-sudo ./install-driver.sh
+sudo sh remove-driver.sh
 ```
 
-Temporary internet access is required for installation. There are
+Note: The following command will reinstall the updated driver after you
+are finished with the distro upgrade and reboot.
+
+```
+sudo sh install-driver.sh
+```
+
+Internet access is required for initial installation. There are
 numerous ways to enable temporary internet access depending on your
 hardware and situation. [One method is to use tethering from a phone.](https://www.makeuseof.com/tag/how-to-tether-your-smartphone-in-linux).
 Another method is to keep a [WiFi adapter that uses an in-kernel driver](https://github.com/morrownr/USB-WiFi/blob/main/home/USB_WiFi_Adapters_that_are_supported_with_Linux_in-kernel_drivers.md) in your toolkit.
@@ -191,19 +220,21 @@ Secure Boot: see FAQ.
 
 ### Installation Steps
 
-Note: The installation instructions are for the novice user. Experienced users are
-welcome to alter the installation to meet their needs. Support will be provided,
-on a best effort basis, based on the steps below.
+Note: The installation instructions are for the novice user. Experienced
+users are welcome to alter the installation to meet their needs. Support
+will be provided, on a best effort basis, based on the steps below.
 
 #### Step 1: Open a terminal (e.g. Ctrl+Alt+T)
 
-#### Step 2: Update and upgrade system packages (select the option for the distro you are using)
+#### Step 2: Update and upgrade system packages (select the option for
+the distro you are using)
 
 Note: If your Linux distro does not fall into one of options listed
-below, you will need to research how to `update` and `upgrade` your system
-packages.
+below, you will need to research how to `update` and `upgrade` your
+system packages.
 
-- Option for Debian based distributions such as Ubuntu, Kali, Armbian and Raspberry Pi OS
+- Option for Debian based distributions such as Ubuntu, Kali, Armbian
+and Raspberry Pi OS
 
 ```
 sudo apt update && sudo apt upgrade
@@ -241,7 +272,8 @@ system to work with. The installation can then be continued with Step 3.
 sudo reboot
 ```
 
-#### Step 3: Install the required packages (select the option for the distro you are using)
+#### Step 3: Install the required packages (select the option for the
+distro you are using)
 
 Note: If your Linux distro does not fall into one of options listed
 below, you will need to research how to properly setup up the development

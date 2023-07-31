@@ -29,14 +29,21 @@
 
 SCRIPT_NAME="remove-driver.sh"
 SCRIPT_VERSION="20230722"
-MODULE_NAME="8852bu"
+
+DRV_NAME="rtl8852bu"
 DRV_VERSION="5.13.1"
+MODULE_NAME="8852bu"
 
-KARCH="$(uname -m)"
-KVER="$(uname -r)"
+#KARCH="$(uname -m)"
+#KVER="$(uname -r)"
+if [ -z "${KARCH+1}" ]; then
+	KARCH="$(uname -m)"
+fi
+if [ -z "${KVER+1}" ]; then
+	KVER="$(uname -r)"
+fi
+
 MODDESTDIR="/lib/modules/${KVER}/kernel/drivers/net/wireless/"
-
-DRV_NAME="rtl${MODULE_NAME}"
 OPTIONS_FILE="${MODULE_NAME}.conf"
 
 # check to ensure sudo was used to start the script
@@ -109,9 +116,10 @@ fi
 if command -v dkms >/dev/null 2>&1; then
 	echo "Removing a dkms installation."
 #	2>/dev/null suppresses the output of dkms
-	dkms status | while IFS=" ,/" read -r modname modver kerver _dummy; do
+#	dkms status | while IFS=" ,-:/" read -r modname modver kerver _dummy; do
+	dkms status | while IFS=" ,-:/" read -r modname modver _dummy; do
 		case "$modname" in *${MODULE_NAME})
-			dkms remove -m "$modname" -v "$modver" -k "$kerver"
+			dkms remove -m "$modname" -v "$modver" --all
 		esac
 	done
 	RESULT=$?

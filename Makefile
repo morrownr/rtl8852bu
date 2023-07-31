@@ -21,6 +21,8 @@ EXTRA_CFLAGS += -Wno-address
 EXTRA_CFLAGS += -Wframe-larger-than=1648
 EXTRA_CFLAGS += -Wno-cast-function-type
 
+DRV_BB_DBG_TRACE_DISABLE=1
+
 ############ ANDROID COMMON KERNEL ############
 # clang
 ifeq ($(CC), clang)
@@ -59,7 +61,7 @@ CONFIG_WAPI_SUPPORT = n
 CONFIG_EFUSE_CONFIG_FILE = n
 CONFIG_EXT_CLK = n
 CONFIG_TRAFFIC_PROTECT = n
-CONFIG_LOAD_PHY_PARA_FROM_FILE = y
+CONFIG_LOAD_PHY_PARA_FROM_FILE = n
 # Remember to set CONFIG_FILE_FWIMG when set CONFIG_FILE_FWIMG to y,
 # or driver will fail on ifconfig up because can't find firmware file
 CONFIG_FILE_FWIMG = n

@@ -29,15 +29,22 @@
 
 SCRIPT_NAME="install-driver.sh"
 SCRIPT_VERSION="20230718"
-MODULE_NAME="8852bu"
+
+DRV_NAME="rtl8852bu"
 DRV_VERSION="1.19.3"
+MODULE_NAME="8852bu"
 
-KARCH="$(uname -m)"
-KVER="$(uname -r)"
-MODDESTDIR="/lib/modules/${KVER}/kernel/drivers/net/wireless/"
+#KARCH="$(uname -m)"
+#KVER="$(uname -r)"
+if [ -z "${KARCH+1}" ]; then
+	KARCH="$(uname -m)"
+fi
+if [ -z "${KVER+1}" ]; then
+	KVER="$(uname -r)"
+fi
 
-DRV_NAME="rtl${MODULE_NAME}"
 DRV_DIR="$(pwd)"
+MODDESTDIR="/lib/modules/${KVER}/kernel/drivers/net/wireless/"
 OPTIONS_FILE="${MODULE_NAME}.conf"
 
 # check to ensure sudo or su - was used to start the script
@@ -250,9 +257,9 @@ fi
 
 # check for and remove all dkms installations with DRV_NAME
 if command -v dkms >/dev/null 2>&1; then
-	dkms status | while IFS=" ,/" read -r modname modver kerver _dummy; do
+	dkms status | while IFS=" ,-:/" read -r modname modver _dummy; do
 		case "$modname" in *${MODULE_NAME})
-			dkms remove -m "$modname" -v "$modver" -k "$kerver"
+			dkms remove -m "$modname" -v "$modver" --all
 		esac
 	done
 	if [ -f /etc/modprobe.d/${OPTIONS_FILE} ]; then
@@ -349,9 +356,9 @@ else
 	fi
 
 	if command -v /usr/bin/time >/dev/null 2>&1; then
-		/usr/bin/time -f "Compile time: %U seconds" dkms build -m ${DRV_NAME} -v ${DRV_VERSION}
+		/usr/bin/time -f "Compile time: %U seconds" dkms build -m ${DRV_NAME} -v ${DRV_VERSION} -k "${KVER}/${KARCH}"
 	else
-		dkms build -m ${DRV_NAME} -v ${DRV_VERSION}
+		dkms build -m ${DRV_NAME} -v ${DRV_VERSION} -k "${KVER}/${KARCH}"
 	fi
 	RESULT=$?
 

@@ -28,10 +28,10 @@
 # GNU General Public License for more details.
 
 SCRIPT_NAME="remove-driver.sh"
-SCRIPT_VERSION="20230722"
+SCRIPT_VERSION="20230801"
 
 DRV_NAME="rtl8852bu"
-DRV_VERSION="5.13.1"
+DRV_VERSION="1.19.3"
 MODULE_NAME="8852bu"
 
 #KARCH="$(uname -m)"

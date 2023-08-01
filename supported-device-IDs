@@ -23,7 +23,8 @@ ID 0BDA:A85B - Default ID
 
 Seller specific IDs
 
-None
+ID 0586:3428 ZyXEL Communications Corp. 802.11ax WLAN Adapter
+ID 0b05:1a62
 
 If your adapter matches one of the default or seller specific
 IDs then this is the driver to use.

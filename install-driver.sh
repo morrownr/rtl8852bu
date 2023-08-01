@@ -257,7 +257,7 @@ fi
 
 # check for and remove all dkms installations with DRV_NAME
 if command -v dkms >/dev/null 2>&1; then
-	dkms status | while IFS=" ,-:/" read -r modname modver _dummy; do
+	dkms status | while IFS=" ,:/" read -r modname modver _dummy; do
 		case "$modname" in *${MODULE_NAME})
 			dkms remove -m "$modname" -v "$modver" --all
 		esac

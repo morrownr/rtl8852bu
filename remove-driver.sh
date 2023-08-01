@@ -115,9 +115,7 @@ fi
 # determine if dkms is installed and run the appropriate routines
 if command -v dkms >/dev/null 2>&1; then
 	echo "Removing a dkms installation."
-#	2>/dev/null suppresses the output of dkms
-#	dkms status | while IFS=" ,-:/" read -r modname modver kerver _dummy; do
-	dkms status | while IFS=" ,-:/" read -r modname modver _dummy; do
+	dkms status | while IFS=" ,:/" read -r modname modver _dummy; do
 		case "$modname" in *${MODULE_NAME})
 			dkms remove -m "$modname" -v "$modver" --all
 		esac

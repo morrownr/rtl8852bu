@@ -31,7 +31,7 @@ static void __exit rtw_mem_exit(void)
 	rtkm_prealloc_destroy();
 }
 
-MODULE_IMPORT_NS(VFS_internal_I_am_really_a_filesystem_and_am_NOT_a_driver);
+// nrm MODULE_IMPORT_NS(VFS_internal_I_am_really_a_filesystem_and_am_NOT_a_driver);
 
 module_init(rtw_mem_init);
 module_exit(rtw_mem_exit);

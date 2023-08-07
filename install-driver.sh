@@ -199,6 +199,20 @@ if command -v mokutil >/dev/null 2>&1; then
 else
 	echo ": mokutil not installed"
 fi
+# need to fix the following
+#: ---------------------------
+#: install-driver.sh v20230718
+#: x86_64 (system architecture)
+#: x86_64 (gcc architecture)
+#: 4/4 (in-use/total processing units)
+#: 16283584 (total system memory)
+#: 5.19.0-50-generic (kernel version)
+#: gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
+#: dkms-2.8.7
+#This system doesn't support Secure Boot
+#This system doesn't support Secure Boot
+#This system doesn't support Secure Boot
+#: ---------------------------
 
 echo ": ---------------------------"
 echo

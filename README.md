@@ -26,7 +26,7 @@ how to confirm that this is the correct driver for your adapter.
 - 802.1x, WEP, WPA TKIP and WPA2 AES/Mixed mode for PSK and TLS (Radius)
 - WPA3-SAE R3
 - WPS - PIN and PBC Methods
-- IEEE 802.11b/g/n/ac Client mode
+- IEEE 802.11b/g/n/ac/ax Client mode
   * Supports wireless security for WEP, WPA TKIP and WPA2 AES PSK
   * Supports site survey scan and manual connect
   * Supports WPA/WPA2 TLS client
@@ -46,7 +46,6 @@ how to confirm that this is the correct driver for your adapter.
   * AP (see [Bridged Wireless Access Point](https://github.com/morrownr/USB-WiFi/blob/main/home/AP_Mode/Bridged_Wireless_Access_Point.md))
   * P2P-client
   * P2P-GO
-- Log level control
 - VHT control (allows 80 MHz channel width in AP mode)
 - AP mode DFS channel control
 - USB mode control
@@ -68,17 +67,20 @@ how to confirm that this is the correct driver for your adapter.
 - armv6l, armv7l (arm)
 - aarch64 (arm64)
 
+Note: Additional CPU architectures may work but I currently only have
+the hardware to test the above.
+
 ### Compatible Kernels
 
 - Kernels: 4.19 - 5.19 (Realtek)
 - Kernels: 6.0  - 6.5  (community support)
 
-Note: Kernels earlier than 4.19 may work but are not tested or supported
-as I only have a limited amount of time to work on this project.
+Note: Kernels earlier than 4.19 may work but are not tested or
+supported.
 
 ### Tested Compilers
 
-- gcc 10, 11 and 12
+- gcc 10, 11, 12 and 13
 
 ### Tested Linux Distributions
 
@@ -122,6 +124,14 @@ support knowledgable Android developers if they want to merge and keep
 current the required support (most likely just instructions about how to
 compile and maybe a modification or two to the Makefile).
 
+Current Android maintainer: none
+
+Note: OpenWRT is not supported. OpenWRT provides drivers for USB WiFi
+adapters. OpenWRT provided drivers include support for the MT7921au
+(AXE3000), MT7612u (AC1200), MT7610u (AC600) chipsets. It is a challenge
+to use Realtek based adapters that use out-of-kernel drivers with
+OpenWRT so it is strongly advised to use the already supported chipsets.
+
 ### Compatible Devices
 
 Warning: The below adapters are multi-state adapters, meaning that they
@@ -148,10 +158,10 @@ and look for Main Menu item 1.
 
 ### Installation Information
 
-Warning: It is recommended that you follow the installation steps in the
-next section. Avoid installation by downloading the zip file if at all
-possible. Support can only be provided, on a best effort basis, if the
-steps in the next section are followed.
+Warning: It is recommended that you follow the installation instructions
+in the Installation Steps section. Avoid installation by downloading the
+zip file if at all possible. Support can only be provided, on a best
+effort basis, if the Installation Steps in the next section are followed.
 
 Warning: Installing multiple out-of-kernel drivers for the same hardware
 usually does not end well. The install-driver.sh script has the
@@ -226,8 +236,7 @@ will be provided, on a best effort basis, based on the steps below.
 
 #### Step 1: Open a terminal (e.g. Ctrl+Alt+T)
 
-#### Step 2: Update and upgrade system packages (select the option for
-the distro you are using)
+#### Step 2: Update and upgrade system packages (select the option for the distro you are using)
 
 Note: If your Linux distro does not fall into one of options listed
 below, you will need to research how to `update` and `upgrade` your
@@ -272,8 +281,7 @@ system to work with. The installation can then be continued with Step 3.
 sudo reboot
 ```
 
-#### Step 3: Install the required packages (select the option for the
-distro you are using)
+#### Step 3: Install the required packages (select the option for the distro you are using)
 
 Note: If your Linux distro does not fall into one of options listed
 below, you will need to research how to properly setup up the development

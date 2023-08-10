@@ -21,7 +21,8 @@ EXTRA_CFLAGS += -Wno-address
 EXTRA_CFLAGS += -Wframe-larger-than=1648
 EXTRA_CFLAGS += -Wno-cast-function-type
 
-DRV_BB_DBG_TRACE_DISABLE=1
+# gcc-13
+EXTRA_CFLAGS += -Wno-enum-int-mismatch
 
 ############ ANDROID COMMON KERNEL ############
 # clang
@@ -40,6 +41,10 @@ EXTRA_CFLAGS += -I$(src)/include
 EXTRA_LDFLAGS += --strip-debug
 
 CONFIG_AUTOCFG_CP = n
+
+# ensure gcc is using the correct ARCH name
+SUBARCH := $(shell uname -m | sed -e "s/i.86/i386/; s/ppc/powerpc/; s/armv.l/arm/; s/aarch64/arm64/; s/riscv.*/riscv/;")
+ARCH ?= $(SUBARCH)
 
 ########################## WIFI IC ############################
 CONFIG_RTL8852A = n
@@ -142,6 +147,7 @@ CONFIG_RTW_DEBUG = n
 # please refer to "How_to_set_driver_debug_log_level.doc" to set the available level.
 CONFIG_RTW_LOG_LEVEL = 0
 CONFIG_RTW_PHL_LOG_LEVEL = 0
+DRV_BB_DBG_TRACE_DISABLE = 1
 
 # enable /proc/net/rtlxxxx/ debug interfaces
 CONFIG_PROC_DEBUG = y
@@ -650,10 +656,6 @@ EXTRA_CFLAGS += -DCONFIG_RTW_MBO -DCONFIG_RTW_WNM -DCONFIG_RTW_BTM_ROAM
 EXTRA_CFLAGS += -DCONFIG_RTW_80211R
 EXTRA_CFLAGS += -DRTW_FT_DBG=0 -DRTW_WNM_DBG=0 -DRTW_MBO_DBG=0
 endif
-
-# ensure gcc is using the correct ARCH name
-#SUBARCH := $(shell uname -m | sed -e "s/i.86/i386/; s/armv.l/arm/; s/aarch64/arm64/;")
-#ARCH ?= $(SUBARCH)
 
 ########### PLATFORM OPS  ##########################
 # Import platform assigned KSRC and CROSS_COMPILE

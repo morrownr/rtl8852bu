@@ -24,6 +24,9 @@ EXTRA_CFLAGS += -Wno-cast-function-type
 # gcc-13
 EXTRA_CFLAGS += -Wno-enum-int-mismatch
 
+# uncomment to enable concurrent mode
+#EXTRA_CFLAGS += -DCONFIG_CONCURRENT_MODE
+
 ############ ANDROID COMMON KERNEL ############
 # clang
 ifeq ($(CC), clang)

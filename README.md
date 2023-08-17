@@ -1,11 +1,14 @@
 ## rtl8852bu ( 8852bu.ko ) :rocket:
 
-## Linux Driver for USB WiFi Adapters that are based on the RTL8852BU and RTL8832BU Chipsets
+## Linux Driver for USB WiFi Adapters that are based on the RTL8832BU and RTL8852BU Chipsets
 
 - v1.19.3 (Realtek) (20230505) plus updates from the Linux community
 
+Note: Please read the file "supported-device-IDs" for information about
+how to confirm that this is the correct driver for your adapter.
+
 Note: Posting this driver is not a recommendation for Linux users to buy
-USB WiFi adapters based on the Realtek rtl8852/32bu chipsets. Realtek
+USB WiFi adapters based on the Realtek rtl8832/52bu chipsets. Realtek
 out-of-kernel wifi drivers, such as this one, are designed to be used by
 skilled programmers producing products such as embedded systems. Users
 of desktop distros such as Ubuntu, Debian, Manjaro, Fedora, Raspberry Pi
@@ -16,9 +19,6 @@ following links will provide more information:
 [USB WiFi adapters that are supported with Linux in-kernel drivers](https://github.com/morrownr/USB-WiFi/blob/main/home/USB_WiFi_Adapters_that_are_supported_with_Linux_in-kernel_drivers.md)
 
 [USB WiFi adapter information for Linux](https://github.com/morrownr/USB-WiFi/blob/main/home/USB_WiFi_Adapter_Information_for_Linux.md)
-
-Note: Please read the file "supported-device-IDs" for information about
-how to confirm that this is the correct driver for your adapter.
 
 ### Supported Features
 

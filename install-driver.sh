@@ -28,23 +28,30 @@
 # GNU General Public License for more details.
 
 SCRIPT_NAME="install-driver.sh"
-SCRIPT_VERSION="20230718"
+SCRIPT_VERSION="20230828"
 
 DRV_NAME="rtl8852bu"
 DRV_VERSION="1.19.3"
 MODULE_NAME="8852bu"
 
-#KARCH="$(uname -m)"
-#KVER="$(uname -r)"
-if [ -z "${KARCH+1}" ]; then
-	KARCH="$(uname -m)"
-fi
-if [ -z "${KVER+1}" ]; then
-	KVER="$(uname -r)"
-fi
+KARCH="$(uname -m)"
+#if [ -z "${KARCH+1}" ]; then
+#	KARCH="$(uname -m)"
+#fi
+
+GARCH="$(uname -m | sed -e "s/i.86/i386/; s/ppc/powerpc/; s/armv.l/arm/; s/aarch64/arm64/; s/riscv.*/riscv/;")"
+#if [ -z "${GARCH+1}" ]; then
+#	GARCH="$(uname -m | sed -e "s/i.86/i386/; s/ppc/powerpc/; s/armv.l/arm/; s/aarch64/arm64/; s/riscv.*/riscv/;")"
+#fi
+
+KVER="$(uname -r)"
+#if [ -z "${KVER+1}" ]; then
+#	KVER="$(uname -r)"
+#fi
 
 DRV_DIR="$(pwd)"
 MODDESTDIR="/lib/modules/${KVER}/kernel/drivers/net/wireless/"
+
 OPTIONS_FILE="${MODULE_NAME}.conf"
 
 # check to ensure sudo or su - was used to start the script
@@ -71,11 +78,6 @@ do
 	esac
 	shift
 done
-
-# ensure /usr/sbin is in the PATH so iw can be found
-if ! echo "$PATH" | grep -qw sbin; then
-        export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-fi
 
 # check to ensure gcc is installed
 if ! command -v gcc >/dev/null 2>&1; then
@@ -109,21 +111,26 @@ if [ ! -d "/lib/modules/$(uname -r)/build" ]; then
 	exit 1
 fi
 
+# ensure /usr/sbin is in the PATH so iw can be found
+#if ! echo "$PATH" | grep -qw sbin; then
+#        export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+#fi
+
 # check to ensure iw is installed
-if ! command -v iw >/dev/null 2>&1; then
-	echo "A required package is not installed."
-	echo "Please install the following package: iw"
-	echo "Once the package is installed, please run \"sudo ./${SCRIPT_NAME}\""
-	exit 1
-fi
+#if ! command -v iw >/dev/null 2>&1; then
+#	echo "A required package is not installed."
+#	echo "Please install the following package: iw"
+#	echo "Once the package is installed, please run \"sudo ./${SCRIPT_NAME}\""
+#	exit 1
+#fi
 
 # check to ensure rfkill is installed
-if ! command -v rfkill >/dev/null 2>&1; then
-	echo "A required package is not installed."
-	echo "Please install the following package: rfkill"
-	echo "Once the package is installed, please run \"sudo ./${SCRIPT_NAME}\""
-	exit 1
-fi
+#if ! command -v rfkill >/dev/null 2>&1; then
+#	echo "A required package is not installed."
+#	echo "Please install the following package: rfkill"
+#	echo "Once the package is installed, please run \"sudo ./${SCRIPT_NAME}\""
+#	exit 1
+#fi
 
 DEFAULT_EDITOR="$(cat default-editor.txt)"
 # try to find the user's default text editor through the EDITORS_SEARCH array
@@ -145,12 +152,11 @@ echo ": ${SCRIPT_NAME} v${SCRIPT_VERSION}"
 
 # information that helps with bug reports
 
-# display system architecture
-echo ": ${KARCH} (system architecture)"
+# display kernel architecture
+echo ": ${KARCH} (kernel architecture)"
 
-# display gcc architecture
-ARCH=$(uname -m | sed -e "s/i.86/i386/; s/armv.l/arm/; s/aarch64/arm64/;")
-echo ": ${ARCH} (gcc architecture)"
+# display architecture to send to gcc
+echo ": ${GARCH} (architecture to send to gcc)"
 
 SMEM=$(LANG=C free | awk '/Mem:/ { print $2 }')
 sproc=$(nproc)
@@ -174,6 +180,10 @@ echo ": ${SMEM} (total system memory)"
 
 # display kernel version
 echo ": ${KVER} (kernel version)"
+
+# display version of gcc used to compile the kernel
+gcc_ver_used_to_compile_the_kernel=$(cat /proc/version | sed 's/^.*gcc/gcc/' | sed 's/\s.*$//')
+echo ": ""${gcc_ver_used_to_compile_the_kernel} (version of gcc used to compile the kernel)"
 
 # display gcc version
 gcc_ver=$(gcc --version | grep -i gcc)
@@ -217,13 +227,11 @@ fi
 echo ": ---------------------------"
 echo
 
-echo "Checking for previously installed drivers."
+echo "Checking for previously installed drivers..."
 
 # check for and remove non-dkms installations
 # standard naming
 if [ -f "${MODDESTDIR}${MODULE_NAME}.ko" ]; then
-	echo ": ---------------------------"
-	echo
 	echo "Removing a non-dkms installation: ${MODDESTDIR}${MODULE_NAME}.ko"
 	rm -f "${MODDESTDIR}"${MODULE_NAME}.ko
 	/sbin/depmod -a "${KVER}"
@@ -238,8 +246,6 @@ fi
 # check for and remove non-dkms installations
 # with rtl added to module name (PClinuxOS)
 if [ -f "${MODDESTDIR}rtl${MODULE_NAME}.ko" ]; then
-	echo ": ---------------------------"
-	echo
 	echo "Removing a non-dkms installation: ${MODDESTDIR}rtl${MODULE_NAME}.ko"
 	rm -f "${MODDESTDIR}"rtl${MODULE_NAME}.ko
 	/sbin/depmod -a "${KVER}"
@@ -256,8 +262,6 @@ fi
 # Example: /usr/lib/modules/5.15.80-rockchip64/kernel/drivers/net/wireless/rtl8821cu/8821cu.ko.xz
 # Dear Armbiam, this is a really bad idea.
 if [ -f "/usr/lib/modules/${KVER}/kernel/drivers/net/wireless/${DRV_NAME}/${MODULE_NAME}.ko.xz" ]; then
-	echo ": ---------------------------"
-	echo
 	echo "Removing a non-dkms installation: /usr/lib/modules/${KVER}/kernel/drivers/net/wireless/${DRV_NAME}/${MODULE_NAME}.ko.xz"
 	rm -f /usr/lib/modules/"${KVER}"/kernel/drivers/net/wireless/${DRV_NAME}/${MODULE_NAME}.ko.xz
 	/sbin/depmod -a "${KVER}"
@@ -270,10 +274,26 @@ if [ -f "/usr/lib/modules/${KVER}/kernel/drivers/net/wireless/${DRV_NAME}/${MODU
 fi
 
 # check for and remove all dkms installations with DRV_NAME
+#
+# dkms status [module/module-version] [-k kernel/arch]
+#
+# $ dkms status
+#
+# nvidia/535.86.05, 6.2.0-27-generic, x86_64: installed
+# nvidia/535.86.05, 6.5.0-060500rc5-generic, x86_64: installed
+# rtl8852bu/1.19.3, 6.2.0-27-generic, x86_64: installed
+# rtl8852bu/1.19.3, 6.5.0-060500rc5-generic, x86_64: installed
+# rtl8852bu/1.15.2, 6.5.0-060500rc5-generic, x86_64: installed
+#
+# dkms remove [module/module-version] [-k kernel/arch] [--all]
+#
+# $ dkms remove "${modname}/${modver}" -c "/usr/src/${modname}-${modver}/dkms.conf" --all
+#
 if command -v dkms >/dev/null 2>&1; then
-	dkms status | while IFS=" ,:/" read -r modname modver _dummy; do
+	dkms status | while IFS="/, " read -r modname modver kerver _dummy; do
 		case "$modname" in *${MODULE_NAME})
-			dkms remove -m "$modname" -v "$modver" --all
+			echo "--> ${modname} ${modver} ${kerver}"
+			dkms remove -m "${modname}" -v "${modver}" -k "${kerver}" -c "/usr/src/${modname}-${modver}/dkms.conf"
 		esac
 	done
 	if [ -f /etc/modprobe.d/${OPTIONS_FILE} ]; then
@@ -284,8 +304,9 @@ if command -v dkms >/dev/null 2>&1; then
 	fi
 fi
 
-# sets module parameters (driver options) and blacklisted modules
+echo "Finished checking for and removing previously installed drivers."
 echo ": ---------------------------"
+
 echo
 echo "Starting installation."
 echo "Installing ${OPTIONS_FILE} to /etc/modprobe.d"
@@ -343,8 +364,10 @@ else
 # 	the dkms add command requires source in /usr/src/${DRV_NAME}-${DRV_VERSION}
 	echo "Copying source files to /usr/src/${DRV_NAME}-${DRV_VERSION}"
 	cp -rf "${DRV_DIR}" /usr/src/${DRV_NAME}-${DRV_VERSION}
+#	echo "${DRV_DIR}"
+#	echo "/usr/src/${DRV_NAME}-${DRV_VERSION}"
 
-	dkms add -m ${DRV_NAME} -v ${DRV_VERSION}
+	dkms add -m ${DRV_NAME} -v ${DRV_VERSION} -k "${KVER}/${KARCH}" -c "/usr/src/${DRV_NAME}-${DRV_VERSION}/dkms.conf"
 	RESULT=$?
 
 #	RESULT will be 3 if the DKMS tree already contains the same module/version
@@ -370,9 +393,9 @@ else
 	fi
 
 	if command -v /usr/bin/time >/dev/null 2>&1; then
-		/usr/bin/time -f "Compile time: %U seconds" dkms build -m ${DRV_NAME} -v ${DRV_VERSION} -k "${KVER}/${KARCH}"
+		/usr/bin/time -f "Compile time: %U seconds" dkms build -m ${DRV_NAME} -v ${DRV_VERSION} -k "${KVER}/${KARCH}" -c "/usr/src/${DRV_NAME}-${DRV_VERSION}/dkms.conf"
 	else
-		dkms build -m ${DRV_NAME} -v ${DRV_VERSION} -k "${KVER}/${KARCH}"
+		dkms build -m ${DRV_NAME} -v ${DRV_VERSION} -k "${KVER}/${KARCH}" -c "/usr/src/${DRV_NAME}-${DRV_VERSION}/dkms.conf"
 	fi
 	RESULT=$?
 
@@ -388,7 +411,7 @@ else
 		echo ": ---------------------------"
 	fi
 
-	dkms install -m ${DRV_NAME} -v ${DRV_VERSION}
+	dkms install -m ${DRV_NAME} -v ${DRV_VERSION} -k "${KVER}/${KARCH}" -c "/usr/src/${DRV_NAME}-${DRV_VERSION}/dkms.conf"
 	RESULT=$?
 
 	if [ "$RESULT" != "0" ]; then

@@ -95,9 +95,9 @@ which can be provided via PR or message in Issues.
 
 - [Fedora](https://getfedora.org) Fedora 38 (6.2.13-300)
 
-- [Kali Linux](https://www.kali.org/) (kernel 5.10)
+- [Kali Linux](https://www.kali.org/) (kernel 6.3)
 
-- [Manjaro](https://manjaro.org) (kernel 5.13)
+- [Manjaro](https://manjaro.org) (kernel 5.15)
 
 - [openSUSE](https://www.opensuse.org/) Tumbleweed (rolling) (kernel 5.15)
 
@@ -397,8 +397,34 @@ cd ~/src/rtl8852bu
 
 #### Step 8: Run the installation script (`install-driver.sh`)
 
-Note: It is recommended that you terminate running apps so as to provide
-the maximum amount of RAM to the compilation process.
+Important: The compilation may fail if the major version of gcc that is
+in use is not the same as the major version of the gcc that was used to
+compile the kernel that is in use:
+
+Example of bad situation:
+
+gcc 12.1 (used to compile the kernel)
+gcc 10.3 (version of gcc in use)
+
+Example of good situation:
+
+gcc 12.2 (used to compile the kernel)
+gcc 12.1 (version of gcc in use)
+
+To determine the values:
+
+$ cat /proc/version
+$ gcc --version
+
+If you find your system in a bad situation, it is recommended that you
+install a version of gcc that matches the major version of gcc that was
+used to compile your kernel. Here is an example for Debian:
+
+# apt install gcc-12
+
+Note: If your system is a low memory system, it is recommended that you
+terminate running apps so as to provide the maximum amount of RAM to the
+compilation process.
 
 Note: For automated builds (non-interactive), use `NoPrompt` as an
 option.
@@ -417,7 +443,7 @@ Note: If you elect to skip the reboot at the end of the installation
 script, the driver may not load immediately and the driver options will
 not be applied. Rebooting is strongly recommended.
 
-Note: Fedora users that have secure boot turned on should run the
+Note: Fedora users that have secure boot turned on may need to run the
 following to enroll the key:
 
 ```

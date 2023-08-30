@@ -28,30 +28,30 @@
 # GNU General Public License for more details.
 
 SCRIPT_NAME="install-driver.sh"
-SCRIPT_VERSION="20230828"
+SCRIPT_VERSION="20230830"
 
 DRV_NAME="rtl8852bu"
 DRV_VERSION="1.19.3"
 MODULE_NAME="8852bu"
 
-KARCH="$(uname -m)"
-#if [ -z "${KARCH+1}" ]; then
-#	KARCH="$(uname -m)"
-#fi
+#KARCH="$(uname -m)"
+if [ -z "${KARCH+1}" ]; then
+	KARCH="$(uname -m)"
+fi
 
-GARCH="$(uname -m | sed -e "s/i.86/i386/; s/ppc/powerpc/; s/armv.l/arm/; s/aarch64/arm64/; s/riscv.*/riscv/;")"
-#if [ -z "${GARCH+1}" ]; then
-#	GARCH="$(uname -m | sed -e "s/i.86/i386/; s/ppc/powerpc/; s/armv.l/arm/; s/aarch64/arm64/; s/riscv.*/riscv/;")"
-#fi
+#KVER="$(uname -r)"
+if [ -z "${KVER+1}" ]; then
+	KVER="$(uname -r)"
+fi
 
-KVER="$(uname -r)"
-#if [ -z "${KVER+1}" ]; then
-#	KVER="$(uname -r)"
-#fi
+#GARCH="$(uname -m | sed -e "s/i.86/i386/; s/ppc/powerpc/; s/armv.l/arm/; s/aarch64/arm64/; s/riscv.*/riscv/;")"
+if [ -z "${GARCH+1}" ]; then
+	GARCH="$(uname -m | sed -e "s/i.86/i386/; s/ppc/powerpc/; s/armv.l/arm/; s/aarch64/arm64/; s/riscv.*/riscv/;")"
+fi
 
 DRV_DIR="$(pwd)"
-MODDESTDIR="/lib/modules/${KVER}/kernel/drivers/net/wireless/"
 
+MODDESTDIR="/lib/modules/${KVER}/kernel/drivers/net/wireless/"
 OPTIONS_FILE="${MODULE_NAME}.conf"
 
 # check to ensure sudo or su - was used to start the script

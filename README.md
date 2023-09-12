@@ -234,7 +234,9 @@ Secure Boot: see FAQ.
 
 Note: The installation instructions are for the novice user. Experienced
 users are welcome to alter the installation to meet their needs. Support
-will be provided, on a best effort basis, based on the steps below.
+will be provided, on a best effort basis, based on the steps below. Another
+way to word this paragraph is that if you do not follow the below steps for
+installation, you are your own tech support.
 
 #### Step 1: Open a terminal (e.g. Ctrl+Alt+T)
 
@@ -536,6 +538,10 @@ sudo make uninstall
 ```
 sudo reboot
 ```
+
+Note: If you use the manual installation instructions, or if dkms is not
+installed, you will need to repeat the process each time a new kernel is
+installed in your distro.
 
 -----
 

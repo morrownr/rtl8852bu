@@ -75,7 +75,7 @@ the hardware to test the above.
 ### Compatible Kernels
 
 - Kernels: 4.19 - 5.19 (Realtek)
-- Kernels: 6.0  - 6.5  (community support)
+- Kernels: 6.0  - 6.6  (community support)
 
 Note: Kernels earlier than 4.19 may work but are not tested or
 supported.
@@ -417,14 +417,21 @@ gcc 12.1 (version of gcc in use)
 
 To determine the values:
 
-$ cat /proc/version
-$ gcc --version
+```
+cat /proc/version
+```
+
+```
+gcc --version
+```
 
 If you find your system in a bad situation, it is recommended that you
 install a version of gcc that matches the major version of gcc that was
-used to compile your kernel. Here is an example for Debian:
+used to compile your kernel. Here is an example for Ubuntu:
 
-# apt install gcc-12
+```
+sudo apt install gcc-12
+```
 
 Note: If your system is a low memory system, it is recommended that you
 terminate running apps so as to provide the maximum amount of RAM to the
@@ -710,6 +717,15 @@ on the computer.
 push the capabilities of the power available via USB port. One example
 is adapters that use the Realtek 8814au chipset. Using a powered
 multiport USB extension can be a good idea in cases like this.
+
+-----
+
+To Contribute:
+
+Fork this repository.
+Make your edits.
+TEST THEM!
+Create a pull request.
 
 -----
 

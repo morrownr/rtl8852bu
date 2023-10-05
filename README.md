@@ -8,19 +8,18 @@ Note: Please read the file "supported-device-IDs" for information about
 how to confirm that this is the correct driver for your adapter.
 
 Note: Posting this driver is not a recommendation for Linux users to buy
-USB WiFi adapters based on the Realtek chipsets supported by this driver.
-Realtek out-of-kernel wifi drivers, such as this one, are not Linux Wireless
-Standards compliant and appear to be designed to be used by skilled
-programmers producing products such as embedded systems. Users of desktop
-and server distros such as Ubuntu, Debian, Manjaro, Fedora, Raspberry Pi OS
-and other mainline desktop and server distros will likely find adapters that
-use in-kernel drivers (Linux Wireless Standards compliant) to be more stable
-and much more trouble-free. The following links will provide more
-information:
-
-[USB WiFi adapters that are supported with Linux in-kernel drivers](https://github.com/morrownr/USB-WiFi/blob/main/home/USB_WiFi_Adapters_that_are_supported_with_Linux_in-kernel_drivers.md)
+USB WiFi adapters based on the Realtek chipsets supported by this
+driver. Realtek out-of-kernel wifi drivers, such as this one, are not
+Linux Wireless Standards compliant and appear to be designed to be used
+by skilled programmers producing products such as embedded systems.
+Users of desktop and server distros such as Ubuntu, Debian, Manjaro,
+Arch, Fedora, Raspberry Pi OS will likely find that adapters that use
+in-kernel drivers are more stable and much more trouble-free. The
+following links will provide more information:
 
 [USB WiFi adapter information for Linux](https://github.com/morrownr/USB-WiFi/blob/main/home/USB_WiFi_Adapter_Information_for_Linux.md)
+
+[USB WiFi adapters that are supported with Linux in-kernel drivers](https://github.com/morrownr/USB-WiFi/blob/main/home/USB_WiFi_Adapters_that_are_supported_with_Linux_in-kernel_drivers.md)
 
 ### Supported Features
 
@@ -722,10 +721,10 @@ multiport USB extension can be a good idea in cases like this.
 
 To Contribute:
 
-Fork this repository.
-Make your edits.
-TEST THEM!
-Create a pull request.
+- Fork this repository.
+- Make your edits.
+- TEST!
+- Create a pull request.
 
 -----
 

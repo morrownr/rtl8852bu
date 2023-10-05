@@ -196,13 +196,13 @@ fi
 
 # display Secure Boot status
 if command -v mokutil >/dev/null 2>&1; then
-    case $(mokutil --sb-state 2>&1) in
-    *enabled*) echo ": SecureBoot enabled" ;;
-    *disabled*) echo ": SecureBoot disabled" ;;
-    *) echo ": This system doesn't support Secure Boot" ;;
-    esac
+	case $(mokutil --sb-state 2>&1) in
+		*enabled*) echo ": SecureBoot enabled" ;;
+		*disabled*) echo ": SecureBoot disabled" ;;
+		*) echo ": This system doesn't support Secure Boot" ;;
+	esac
 else
-    echo ": mokutil not installed"
+	echo ": mokutil not installed"
 fi
 
 echo ": ---------------------------"

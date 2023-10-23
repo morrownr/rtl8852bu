@@ -157,6 +157,7 @@ static struct usb_device_id rtw_usb_id_tbl[] = {
 	{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDER_ID_REALTEK, 0xA85B, 0xff, 0xff, 0xff), .driver_info = RTL8852B},
 	{USB_DEVICE_AND_INTERFACE_INFO(0x0586, 0x3428, 0xff, 0xff, 0xff), .driver_info = RTL8852B},
 	{USB_DEVICE_AND_INTERFACE_INFO(0x0b05, 0x1a62, 0xff, 0xff, 0xff), .driver_info = RTL8852B},	
+	{USB_DEVICE_AND_INTERFACE_INFO(0x3574, 0x6121, 0xff, 0xff, 0xff), .driver_info = RTL8852B},
 #endif /* CONFIG_RTL8852B */
 
 #ifdef CONFIG_RTL8852BP

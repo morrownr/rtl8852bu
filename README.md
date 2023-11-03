@@ -3,6 +3,7 @@
 ## Linux Driver for USB WiFi Adapters that are based on the RTL8832BU and RTL8852BU Chipsets
 
 - v1.19.3 (Realtek) (20230505) plus updates from the Linux community
+- Realtek development of this driver is ongoing.
 
 Note: Please read the file "supported-device-IDs" for information about
 how to confirm that this is the correct driver for your adapter.

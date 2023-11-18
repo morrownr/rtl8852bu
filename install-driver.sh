@@ -28,7 +28,7 @@
 # GNU General Public License for more details.
 
 SCRIPT_NAME="install-driver.sh"
-SCRIPT_VERSION="20231001"
+SCRIPT_VERSION="20231115"
 
 DRV_NAME="rtl8852bu"
 DRV_VERSION="1.19.3"
@@ -157,7 +157,7 @@ echo ": ${KARCH} (kernel architecture)"
 # display architecture to send to gcc
 echo ": ${GARCH} (architecture to send to gcc)"
 
-SMEM=$(LANG=C free | awk '/Mem:/ { print $2 }')
+SMEM=$(LC_ALL=C free | awk '/Mem:/ { print $2 }')
 sproc=$(nproc)
 # avoid Out of Memory condition in low-RAM systems by limiting core usage
 if [ "$sproc" -gt 1 ]; then

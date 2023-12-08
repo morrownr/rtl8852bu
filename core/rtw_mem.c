@@ -37,6 +37,6 @@ module_init(rtw_mem_init);
 module_exit(rtw_mem_exit);
 
 MODULE_LICENSE("GPL");
-MODULE_DESCRIPTION("Realtek Wireless Lan Driver");
+MODULE_DESCRIPTION("Edimax EW-7822UMX Wi-Fi USB Adapter");
 MODULE_AUTHOR("Realtek Semiconductor Corp.");
 MODULE_VERSION("DRIVERVERSION");

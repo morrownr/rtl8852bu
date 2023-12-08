@@ -1179,6 +1179,8 @@ static void rtw_load_phy_file_path (struct dvobj_priv *dvobj)
 	if (rtw_load_phy_file & LOAD_BB_PHY_REG_FILE) {
 		phl_com->phy_sw_cap[0].bb_phy_reg_info.para_src = RTW_PARA_SRC_EXTNAL;
 		phl_com->phy_sw_cap[1].bb_phy_reg_info.para_src = RTW_PARA_SRC_EXTNAL;
+		phl_com->phy_sw_cap[0].bb_phy_reg_info.hal_phy_folder = rtw_phy_file_path;
+		phl_com->phy_sw_cap[1].bb_phy_reg_info.hal_phy_folder = rtw_phy_file_path;
 	}
 
 	if (rtw_load_phy_file & LOAD_RF_RADIO_FILE) {
@@ -1186,41 +1188,59 @@ static void rtw_load_phy_file_path (struct dvobj_priv *dvobj)
 		phl_com->phy_sw_cap[1].rf_radio_a_info.para_src = RTW_PARA_SRC_EXTNAL;
 		phl_com->phy_sw_cap[0].rf_radio_b_info.para_src = RTW_PARA_SRC_EXTNAL;
 		phl_com->phy_sw_cap[1].rf_radio_b_info.para_src = RTW_PARA_SRC_EXTNAL;
+		phl_com->phy_sw_cap[0].rf_radio_a_info.hal_phy_folder = rtw_phy_file_path;
+		phl_com->phy_sw_cap[1].rf_radio_a_info.hal_phy_folder = rtw_phy_file_path;
+		phl_com->phy_sw_cap[0].rf_radio_b_info.hal_phy_folder = rtw_phy_file_path;
+		phl_com->phy_sw_cap[1].rf_radio_b_info.hal_phy_folder = rtw_phy_file_path;
 	}
 
 	if (rtw_load_phy_file & LOAD_RF_TXPWR_BY_RATE) {
 		phl_com->phy_sw_cap[0].rf_txpwr_byrate_info.para_src = RTW_PARA_SRC_EXTNAL;
 		phl_com->phy_sw_cap[1].rf_txpwr_byrate_info.para_src = RTW_PARA_SRC_EXTNAL;
+		phl_com->phy_sw_cap[0].rf_txpwr_byrate_info.hal_phy_folder = rtw_phy_file_path;
+		phl_com->phy_sw_cap[1].rf_txpwr_byrate_info.hal_phy_folder = rtw_phy_file_path;
 	}
 
 	if (rtw_load_phy_file & LOAD_RF_TXPWR_TRACK_FILE) {
 		phl_com->phy_sw_cap[0].rf_txpwrtrack_info.para_src = RTW_PARA_SRC_EXTNAL;
 		phl_com->phy_sw_cap[1].rf_txpwrtrack_info.para_src = RTW_PARA_SRC_EXTNAL;
+		phl_com->phy_sw_cap[0].rf_txpwrtrack_info.hal_phy_folder = rtw_phy_file_path;
+		phl_com->phy_sw_cap[1].rf_txpwrtrack_info.hal_phy_folder = rtw_phy_file_path;
 	}
 
 	if (rtw_load_phy_file & LOAD_RF_TXPWR_LMT_FILE) {
 		phl_com->phy_sw_cap[0].rf_txpwrlmt_info.para_src = RTW_PARA_SRC_EXTNAL;
 		phl_com->phy_sw_cap[1].rf_txpwrlmt_info.para_src = RTW_PARA_SRC_EXTNAL;
+		phl_com->phy_sw_cap[0].rf_txpwrlmt_info.hal_phy_folder = rtw_phy_file_path;
+		phl_com->phy_sw_cap[1].rf_txpwrlmt_info.hal_phy_folder = rtw_phy_file_path;
 	}
 
 	if (rtw_load_phy_file & LOAD_RF_TXPWR_LMT_RU_FILE) {
 		phl_com->phy_sw_cap[0].rf_txpwrlmt_ru_info.para_src = RTW_PARA_SRC_EXTNAL;
 		phl_com->phy_sw_cap[1].rf_txpwrlmt_ru_info.para_src = RTW_PARA_SRC_EXTNAL;
+		phl_com->phy_sw_cap[0].rf_txpwrlmt_ru_info.hal_phy_folder = rtw_phy_file_path;
+		phl_com->phy_sw_cap[1].rf_txpwrlmt_ru_info.hal_phy_folder = rtw_phy_file_path;
 	}
 
 	if (rtw_load_phy_file & LOAD_BB_PHY_REG_GAIN_FILE) {
 		phl_com->phy_sw_cap[0].bb_phy_reg_gain_info.para_src = RTW_PARA_SRC_EXTNAL;
 		phl_com->phy_sw_cap[1].bb_phy_reg_gain_info.para_src = RTW_PARA_SRC_EXTNAL;
+		phl_com->phy_sw_cap[0].bb_phy_reg_gain_info.hal_phy_folder = rtw_phy_file_path;
+		phl_com->phy_sw_cap[1].bb_phy_reg_gain_info.hal_phy_folder = rtw_phy_file_path;
 	}
 
 	if (rtw_load_phy_file & LOAD_RF_TXPWR_LMT_6G_FILE) {
 		phl_com->phy_sw_cap[0].rf_txpwrlmt_6g_info.para_src = RTW_PARA_SRC_EXTNAL;
 		phl_com->phy_sw_cap[1].rf_txpwrlmt_6g_info.para_src = RTW_PARA_SRC_EXTNAL;
+		phl_com->phy_sw_cap[0].rf_txpwrlmt_6g_info.hal_phy_folder = rtw_phy_file_path;
+		phl_com->phy_sw_cap[1].rf_txpwrlmt_6g_info.hal_phy_folder = rtw_phy_file_path;
 	}
 
 	if (rtw_load_phy_file & LOAD_RF_TXPWR_LMT_RU_6G_FILE) {
 		phl_com->phy_sw_cap[0].rf_txpwrlmt_ru_6g_info.para_src = RTW_PARA_SRC_EXTNAL;
 		phl_com->phy_sw_cap[1].rf_txpwrlmt_ru_6g_info.para_src = RTW_PARA_SRC_EXTNAL;
+		phl_com->phy_sw_cap[0].rf_txpwrlmt_ru_6g_info.hal_phy_folder = rtw_phy_file_path;
+		phl_com->phy_sw_cap[1].rf_txpwrlmt_ru_6g_info.hal_phy_folder = rtw_phy_file_path;
 	}
 
 #endif/* CONFIG_LOAD_PHY_PARA_FROM_FILE */

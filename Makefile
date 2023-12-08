@@ -76,7 +76,7 @@ CONFIG_FILE_FWIMG = n
 CONFIG_TXPWR_BY_RATE = y
 CONFIG_TXPWR_BY_RATE_EN = y
 CONFIG_TXPWR_LIMIT = y
-CONFIG_TXPWR_LIMIT_EN = n
+CONFIG_TXPWR_LIMIT_EN = y
 CONFIG_RTW_REGDB = phl
 ########################## Initial Channel Plan  ##########################
 # XX: unspecified
@@ -747,10 +747,12 @@ strip:
 	$(CC_STRIP) $(MODULE_NAME).ko --strip-unneeded
 
 install:
+	install -p -m 644 powertable/* /lib/firmware/
 	install -p -m 644 $(MODULE_NAME).ko  $(MODDESTDIR)
 	/sbin/depmod -a ${KVER}
 
 uninstall:
+	rm -f /lib/firmware/TXPWR_ByRate.txt /lib/firmware/TXPWR_LMT.txt
 	rm -f $(MODDESTDIR)$(MODULE_NAME).ko
 	/sbin/depmod -a ${KVER}
 

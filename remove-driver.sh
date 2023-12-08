@@ -47,6 +47,8 @@ fi
 MODDESTDIR="/lib/modules/${KVER}/kernel/drivers/net/wireless/"
 OPTIONS_FILE="${MODULE_NAME}.conf"
 
+POWERTABLE_FILES="/lib/firmware/TXPWR_ByRate.txt /lib/firmware/TXPWR_LMT.txt"
+
 # check to ensure sudo or su - was used to start the script
 if [ "$(id -u)" -ne 0 ]; then
 	echo "You must run this script with superuser (root) privileges."
@@ -143,6 +145,10 @@ echo "Removing ${OPTIONS_FILE} from /etc/modprobe.d"
 rm -f /etc/modprobe.d/${OPTIONS_FILE}
 echo "Removing source files from /usr/src/${DRV_NAME}-${DRV_VERSION}"
 rm -rf /usr/src/${DRV_NAME}-${DRV_VERSION}
+echo "Removing ${POWERTABLE_FILES}"
+for file in $POWERTABLE_FILES; do
+    rm -f $file
+done
 make clean >/dev/null 2>&1
 echo "The driver was removed successfully."
 echo "You may now delete the driver directory if desired."

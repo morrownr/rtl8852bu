@@ -1,0 +1,40 @@
+//rtl8852a version = 35
+//rtl8852a version = 1
+//rtl8852a version = 1
+//rtl8852A
+//
+//Note1 : Offset value are signed numbers. Ex : -1 -2 0 1
+//
+#[v3][Exact]#
+//
+#[2.4G]#
+#[START]#
+[Nss1] 	11M_1M	 18 18 18 18 // CCK_{11M 5.5M 2M 1M} TX power (H-byte->L-byte)
+[Nss1] 	18M_6M	 18 18 18 18 // OFDM_{18M 12M 9M 6M} TX power (H-byte->L-byte)
+[Nss1] 	54M_24M	 16 16 17 17 // OFDM_{54M 48M 36M 24M} TX power (H-byte->L-byte)
+[Nss1] 	MCS3_0	 18 18 18 18 // HT_VHT_HE_{MCS3 MCS2 MCS1 MCS0} TX power (H-byte->L-byte)
+[Nss1] 	MCS7_4	 16 16 17 17 // HT_VHT_HE_{MCS7 MCS6 MCS5 MCS4} TX power (H-byte->L-byte)
+[Nss1] 	MCS11_8	 14 14 15 15 // VHT_HE_{MCS11 MCS10 MCS9 MCS8} TX power (H-byte->L-byte)
+[Nss1] 	DCM4_0	 18 18 18 18 // HEDCM_{MCS4 MCS3 MCS1 MCS0} TX power (H-byte->L-byte)
+[Nss2] 	MCS3_0	 18 18 18 18 // VHT_HE_{MCS3 MCS2 MCS1 MCS0} & HT_{MC11 MCS10 MCS9 MCS8} TX power (H-byte->L-byte)
+[Nss2] 	MCS7_4	 16 16 17 17 // VHT_HE_{MCS7 MCS6 MCS5 MCS4} & HT_{MC15 MCS14 MCS13 MCS12} TX power (H-byte->L-byte)
+[Nss2] 	MCS11_8	 14 14 15 15 // VHT_HE_{MCS11 MCS10 MCS9 MCS8} TX power (H-byte->L-byte)
+[Nss2] 	DCM4_0	 18 18 18 18 // HEDCM_{MCS4 MCS3 MCS1 MCS0} TX power (H-byte->L-byte)
+[Offset]	AllRate2_1	 0 0 0 0 // {CCK OFDM HT VHT} TX Power offset (H-byte->L-byte)
+[Offset]	AllRate2_2	 0 0 0 0 // { HE_HEDCM NA NA NA} TX Power offset (H-byte->L-byte)
+#[END]#
+//
+#[5G]#
+#[START]#
+[Nss1] 	18M_6M	 17 17 17 17 // OFDM_{18M 12M 9M 6M} TX power (H-byte->L-byte)
+[Nss1] 	54M_24M	 16 16 17 17 // OFDM_{54M 48M 36M 24M} TX power (H-byte->L-byte)
+[Nss1] 	MCS3_0	 17 17 17 17 // HT_ VHT_HE_{MCS3 MCS2 MCS1 MCS0} TX power (H-byte->L-byte)
+[Nss1] 	MCS7_4	 16 16 17 17 // HT_VHT_HE_{MCS7 MCS6 MCS5 MCS4} TX power (H-byte->L-byte)
+[Nss1] 	MCS11_8	 14 14 15 15 // VHT_HE_{MCS11 MCS10 MCS9 MCS8} TX power (H-byte->L-byte)
+[Nss1] 	DCM4_0	 17 17 17 17 // HEDCM_{MCS4 MCS3 MCS1 MCS0} TX power (H-byte->L-byte)
+[Nss2] 	MCS3_0	 17 17 17 17 // VHT_HE_{MCS3 MCS2 MCS1 MCS0} & HT_{MC11 MCS10 MCS9 MCS8} TX power (H-byte->L-byte)
+[Nss2] 	MCS7_4	 16 16 17 17 // VHT_HE_{MCS7 MCS6 MCS5 MCS4} & HT_{MC15 MCS14 MCS13 MCS12} TX power (H-byte->L-byte)
+[Nss2] 	MCS11_8	 14 14 15 15 // VHT_HE_{MCS11 MCS10 MCS9 MCS8} TX power (H-byte->L-byte)
+[Nss2] 	DCM4_0	 17 17 17 17 // HEDCM_{MCS4 MCS3 MCS1 MCS0} TX power (H-byte->L-byte)
+[Offset]	AllRate5_1	 0 0 0 0 // {OFDM HT VHT HE_HEDCM} TX Power offset (H-byte->L-byte)
+#[END]#

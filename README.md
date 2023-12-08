@@ -75,7 +75,7 @@ the hardware to test the above.
 ### Compatible Kernels
 
 - Kernels: 4.19 - 5.19 (Realtek)
-- Kernels: 6.0  - 6.6  (community support)
+- Kernels: 6.0  - 6.7  (community support)
 
 Note: Kernels earlier than 4.19 may work but are not tested or
 supported.
@@ -103,7 +103,7 @@ which can be provided via PR or message in Issues.
 
 - [openSUSE](https://www.opensuse.org/) Tumbleweed (rolling) (kernel 5.15)
 
-- [Raspberry Pi OS](https://www.raspberrypi.org) (2023-05-03)(ARM 32 bit and 64 bit) (kernel 6.1.38)
+- [Raspberry Pi OS](https://www.raspberrypi.org) (2023-10-10)(kernel 6.1)
 
 - [Raspberry Pi Desktop](https://www.raspberrypi.org) (2022-07-01) (x86 32 bit) (kernel 5.10)
 
@@ -407,13 +407,17 @@ compile the kernel that is in use:
 
 Example of bad situation:
 
+```
 gcc 12.1 (used to compile the kernel)
 gcc 10.3 (version of gcc in use)
+```
 
 Example of good situation:
 
+```
 gcc 12.2 (used to compile the kernel)
 gcc 12.1 (version of gcc in use)
+```
 
 To determine the values:
 

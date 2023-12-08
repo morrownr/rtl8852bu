@@ -23,6 +23,9 @@ EXTRA_CFLAGS += -Wno-cast-function-type
 
 # gcc-13
 EXTRA_CFLAGS += -Wno-enum-int-mismatch
+EXTRA_CFLAGS += -Wno-stringop-overread
+EXTRA_CFLAGS += -Wno-enum-conversion
+EXTRA_CFLAGS += -Wno-int-in-bool-context
 
 # uncomment to enable concurrent mode
 #EXTRA_CFLAGS += -DCONFIG_CONCURRENT_MODE

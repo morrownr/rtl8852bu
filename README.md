@@ -24,6 +24,10 @@ following links will provide more information:
 
 ### Supported Features
 
+Note: The following list of capabilities is mostly based on what Realtek
+says the capabilities are. However, testing has been limited on anything
+beyond managed mode.
+
 - IEEE 802.11 b/g/n/ac/ax WiFi compliant
 - 802.1x, WEP, WPA TKIP and WPA2 AES/Mixed mode for PSK and TLS (Radius)
 - WPA3-SAE R3
@@ -36,20 +40,15 @@ following links will provide more information:
 - WiFi-Direct
 - Mesh
 - Wake on WLAN
-- Wireshark compatible
-- Aircrack-ng compatible
-- Packet injection
-- hostapd compatible
 - AP mode DFS channel support
 - Supported interface modes
-  * IBSS
+  * IBSS (no testing)
   * Managed
-  * Monitor (see [Monitor_Mode](https://github.com/morrownr/Monitor_Mode))
-  * AP (see [Bridged Wireless Access Point](https://github.com/morrownr/USB-WiFi/blob/main/home/AP_Mode/Bridged_Wireless_Access_Point.md))
-  * P2P-client
-  * P2P-GO
+  * Monitor (very limited testing)
+  * AP (recent testing shows AP mode support is poor)
+  * P2P-client (no testing)
+  * P2P-GO (no testing)
 - VHT control (allows 80 MHz channel width in AP mode)
-- AP mode DFS channel control
 - USB mode control
 
 ### Not supported

@@ -27,6 +27,7 @@ ID 0586:3428 ZyXEL Communications Corp. 802.11ax WLAN Adapter
 ID 0b05:1a62
 ID 3574:6121
 ID 7392:6822 EDIMAX EW-7822UMX
+ID 0db0:6931 Micro Star International 802.11ax WLAN Adapter
 
 If your adapter matches one of the default or seller specific
 IDs then this is the driver to use.

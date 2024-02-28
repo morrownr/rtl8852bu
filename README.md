@@ -74,14 +74,14 @@ the hardware to test the above.
 ### Compatible Kernels
 
 - Kernels: 4.19 - 5.19 (Realtek)
-- Kernels: 6.0  - 6.7  (community support)
+- Kernels: 6.0  - 6.8  (community support)
 
 Note: Kernels earlier than 4.19 may work but are not tested or
 supported.
 
 ### Tested Compilers
 
-- gcc 10, 11, 12 and 13
+- gcc 11, 12 and 13
 
 ### Tested Linux Distributions
 

@@ -26,6 +26,8 @@ EXTRA_CFLAGS += -Wno-enum-int-mismatch
 EXTRA_CFLAGS += -Wno-stringop-overread
 EXTRA_CFLAGS += -Wno-enum-conversion
 EXTRA_CFLAGS += -Wno-int-in-bool-context
+EXTRA_CFLAGS += -Wno-missing-prototypes
+EXTRA_CFLAGS += -Wno-missing-declarations
 
 # uncomment to enable concurrent mode
 #EXTRA_CFLAGS += -DCONFIG_CONCURRENT_MODE

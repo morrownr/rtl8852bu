@@ -142,6 +142,7 @@ have an internal Windows driver, and may be problematic on Linux.
 * Brostrend AX4L
 * ALFA AWUS036AXER
 * ALFA AWUS036AX
+* ASUS USB-AX55 Nano
 * Additional adapters that are based on the supported chipsets.
 
 Note: If you are looking for information about what adapter to buy,

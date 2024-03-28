@@ -51,10 +51,6 @@ beyond managed mode.
 - VHT control (allows 80 MHz channel width in AP mode)
 - USB mode control
 
-### Not supported
-
-- hcxdumptool (see hcxdumptool documentation)
-
 ### A FAQ is available in this repo with the name `FAQ.md`
 
 - Please read the FAQ and this document before posting issues.
@@ -74,7 +70,7 @@ the hardware to test the above.
 ### Compatible Kernels
 
 - Kernels: 4.19 - 5.19 (Realtek)
-- Kernels: 6.0  - 6.8  (community support)
+- Kernels: 6.0  - 6.9  (community support)
 
 Note: Kernels earlier than 4.19 may work but are not tested or
 supported.

@@ -29,6 +29,11 @@ EXTRA_CFLAGS += -Wno-int-in-bool-context
 EXTRA_CFLAGS += -Wno-missing-prototypes
 EXTRA_CFLAGS += -Wno-missing-declarations
 
+# gcc-14
+EXTRA_CFLAGS += -Wno-empty-body
+EXTRA_CFLAGS += -Wno-old-style-declaration
+EXTRA_CFLAGS += -Wno-restrict
+
 # uncomment to enable concurrent mode
 #EXTRA_CFLAGS += -DCONFIG_CONCURRENT_MODE
 

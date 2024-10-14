@@ -10331,6 +10331,7 @@ static int rtw_cfg80211_init_wiphy(_adapter *adapter, struct wiphy *wiphy)
 	wiphy->max_num_csa_counters = MAX_CSA_CNT;
 #endif
 #endif /* CONFIG_ECSA_PHL */
+	wiphy->flags |= WIPHY_FLAG_NETNS_OK;
 
 	ret = _SUCCESS;
 

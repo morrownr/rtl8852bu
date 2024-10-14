@@ -663,6 +663,7 @@ int rtw_os_ndev_register(_adapter *adapter, const char *name)
 	rtw_init_netdev_name(ndev, name);
 
 	dev_addr_mod(ndev, 0, adapter_mac_addr(adapter), ETH_ALEN);
+	dev_net_set(ndev, wiphy_net(adapter_to_wiphy(adapter)));
 
 	/* Tell the network stack we exist */
 

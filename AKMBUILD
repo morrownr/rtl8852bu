@@ -1,0 +1,11 @@
+modname=rtl8852bu
+modver=git
+built_modules='8852bu.ko'
+
+build() {
+  cp -R "$srcdir"/* "$builddir"/
+  cd "$builddir"  
+  make
+  #touch "$builddir"/Makefile
+  #make $MAKEFLAGS -C "$kernel_srcdir" M="$builddir" src="$srcdir"
+}
